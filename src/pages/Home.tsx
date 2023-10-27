@@ -2,6 +2,8 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/rea
 import ExploreContainer from '../components/ExploreContainer';
 import './Home.css';
 
+// testing git connection -sini
+
 const Home: React.FC = () => {
   return (
     <IonPage>
