@@ -27,7 +27,6 @@ const Settings: React.FC = () => {
             <IonLabel>Notifications</IonLabel>
             <IonToggle />
           </IonItem>
-          {/* Add more settings options */}
         </IonList>
       </IonContent>
     </IonPage>

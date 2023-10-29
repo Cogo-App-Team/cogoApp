@@ -24,7 +24,6 @@ const Profile: React.FC = () => {
           <img src="user-profile-image.jpg" alt="User Profile" />
         </IonAvatar>
         <IonLabel>User Name</IonLabel>
-        {/* Display more profile information */}
       </IonContent>
     </IonPage>
   );

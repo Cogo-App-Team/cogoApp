@@ -1,99 +1,60 @@
-import React, { useState } from "react";
-import {
-  IonContent,
-  IonButton,
-  IonInput,
-  IonItem,
-  IonLabel,
-  IonPage,
-  IonAlert,
-} from "@ionic/react";
-import { useUserAuth } from "../context/UserAuthContext";
-import { FirebaseError } from "firebase/app";
-
+import React, { useRef, useState, useEffect } from "react";
+import { IonCard, IonButton, IonInput, IonAlert } from "@ionic/react";
+import { Link, useHistory } from "react-router-dom";
+import { auth } from "../firebase";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 
 const Login: React.FC = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [showError, setShowError] = useState(false);
-  const [error, setError] = useState<string>("");
-  const { logIn, googleSignIn } = useUserAuth();
+  const emailRef = useRef<HTMLIonInputElement>(null);
+  const passwordRef = useRef<HTMLIonInputElement>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
-  const handleLogin = async () => {
-    setError(""); // Clear previous errors
-    try {
-      await logIn(email, password);
-      // Navigate to home page upon successful login
-      // You can use IonRouterLink if you have a route set up
-    } catch (err) {
-      const errorText = (err as Error).message || "An error occurred";
-      setError(errorText);
-      setShowError(true);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        history.push("/");
+      }
+    });
+
+    return unsubscribe;
+  }, [history]);
+
+  const handleSubmit = async () => {
+    if (emailRef.current?.value && passwordRef.current?.value) {
+      setError(null);
+      setLoading(true);
+      try {
+        const email = emailRef.current!.value as string;
+        const password = passwordRef.current!.value as string;
+        await signInWithEmailAndPassword(auth, email, password);
+        history.push("/");
+      } catch {
+        setError("Failed to log in");
+      }
+      setLoading(false);
     }
   };
   
-  const handleGoogleSignIn = async () => {
-    try {
-      await googleSignIn();
-      // Navigate to home page upon successful Google sign-in
-      // You can use IonRouterLink if you have a route set up
-    } catch (error) {
-      const errorText = (error as FirebaseError).message || "An error occurred";
-      console.log(errorText);
-    }
-  };
 
   return (
-    <IonPage>
-      <IonContent>
-        <div className="p-4 box">
-          <h2 className="mb-3">Firebase Auth Login</h2>
-          {error && (
-            <IonAlert
-              isOpen={showError}
-              onDidDismiss={() => setShowError(false)}
-              header="Error"
-              message={error}
-              buttons={["OK"]}
-            />
-          )}
-          <IonItem>
-            <IonLabel position="floating">Email address</IonLabel>
-            <IonInput
-              type="email"
-              onIonChange={(e) => setEmail(e.detail.value!)}
-            ></IonInput>
-          </IonItem>
-          <IonItem>
-            <IonLabel position="floating">Password</IonLabel>
-            <IonInput
-              type="password"
-              onIonChange={(e) => setPassword(e.detail.value!)}
-            ></IonInput>
-          </IonItem>
-          <div className="d-grid gap-2">
-            <IonButton expand="full" onClick={handleLogin}>
-              Log In
-            </IonButton>
-          </div>
-        </div>
-        <div className="p-4 box mt-3 text-center">
-          <p>Don't have an account? Sign up</p>
-          <IonButton fill="clear" routerLink="/signup">
-            Sign up
-          </IonButton>
-        </div>
-        <div className="p-4 box mt-3 text-center">
-          <IonButton
-            expand="full"
-            onClick={handleGoogleSignIn}
-            className="g-btn"
-          >
-            Sign in with Google
-          </IonButton>
-        </div>
-      </IonContent>
-    </IonPage>
+    <IonCard>
+      <h2 className="ion-text-center">Log In</h2>
+      {error && <IonAlert isOpen={true} header="Error" message={error} buttons={["OK"]} />}
+      <IonInput type="email" ref={emailRef} placeholder="Email"></IonInput>
+      <IonInput type="password" ref={passwordRef} placeholder="Password"></IonInput>
+      <IonButton expand="full" onClick={handleSubmit} disabled={loading}>
+        Log In
+      </IonButton>
+      <p className="ion-text-center">
+         <Link to="/login/forgot-password">Forgot Password?</Link>
+      </p>
+      <p className="ion-text-center">
+           Need an account? <Link to="/login/signup">Sign Up</Link>
+      </p>
+
+    </IonCard>
   );
 };
 

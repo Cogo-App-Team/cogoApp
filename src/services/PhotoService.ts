@@ -1,9 +1,7 @@
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
-import { Capacitor } from '@capacitor/core';
-import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
+import { Filesystem, Directory } from '@capacitor/filesystem';
 
-
-interface UserPhoto {
+export interface UserPhoto {
   filepath: string;
   webviewPath?: string;
 }
@@ -12,80 +10,66 @@ class PhotoService {
   getGalleryPhotos() {
       throw new Error('Method not implemented.');
   }
-  public async takeAndSavePhoto() {
+  public async takeAndSavePhoto(): Promise<UserPhoto | null> {
     try {
       const image = await Camera.getPhoto({
         resultType: CameraResultType.Uri,
         source: CameraSource.Camera,
         quality: 100,
       });
-  
+
       const savedImage = await this.saveToGallery(image);
-  
+
       return savedImage;
     } catch (error) {
       console.error('Error taking photo: ', error);
       return null;
     }
   }
-  
 
-  private async saveToGallery(photo: Photo) {
+  private async saveToGallery(photo: Photo): Promise<UserPhoto | null> {
     const base64Data = await this.readAsBase64(photo);
-    
+
     if (base64Data === null) {
       console.error('Error converting photo to base64');
-      return null; // Handle the error gracefully in your app
+      return null;
     }
-  
+
     const fileName = `${new Date().getTime()}.jpeg`;
-  
+
     try {
-      // Convert base64Data to a Blob
       const blob = new Blob([base64Data], { type: 'image/jpeg' });
-  
+
       await Filesystem.writeFile({
         path: fileName,
-        data: blob, // Use the Blob data here
-        directory: Directory.Data, // Use Directory.Data or another suitable directory
+        data: blob,
+        directory: Directory.Data,
       });
-  
-      return fileName;
+
+      return { filepath: fileName, webviewPath: photo.webPath };
     } catch (error) {
       console.error('Error saving photo to gallery: ', error);
       return null;
     }
   }
-  
 
-  private async readAsBase64(photo: Photo) {
+  private async readAsBase64(photo: Photo): Promise<string | null> {
     if (!photo.webPath) {
       console.error('Photo webPath is undefined');
       return null;
     }
-  
+
     const response = await fetch(photo.webPath);
     const blob = await response.blob();
     const buffer = await blob.arrayBuffer();
-    const base64Data = btoa(new Uint8Array(buffer).reduce((data, byte) => data + String.fromCharCode(byte), ''));
-  
-    return `data:image/jpeg;base64,${base64Data}`;
-  }
-  
+    const base64Data = btoa(
+      new Uint8Array(buffer).reduce(
+        (data, byte) => data + String.fromCharCode(byte),
+        ''
+      )
+    );
 
-  private convertBlobToBase64(blob: Blob) {
-    return new Promise<string>((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onerror = reject;
-      reader.onload = () => {
-        if (reader.result && typeof reader.result === 'string') {
-          resolve(reader.result);
-        } else {
-          reject('Error converting Blob to string');
-        }
-      };
-      reader.readAsDataURL(blob);
-    });
+    return `data:image/jpeg;base64,${base64Data}`;
   }
 }
 

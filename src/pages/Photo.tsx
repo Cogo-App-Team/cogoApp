@@ -20,7 +20,7 @@ const Photo: React.FC = () => {
   const takePhoto = async () => {
     try {
       const image = await Camera.getPhoto({
-        resultType: CameraResultType.DataUrl, // Use Data URL to display the image
+        resultType: CameraResultType.DataUrl,
         source: CameraSource.Camera,
       });
 
@@ -37,7 +37,7 @@ const Photo: React.FC = () => {
     if (photoData) {
       const a = document.createElement('a');
       a.href = photoData;
-      a.download = 'my_photo.jpg'; // You can specify the file name
+      a.download = 'my_photo.jpg';
       a.click();
     }
   };

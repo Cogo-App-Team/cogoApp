@@ -30,7 +30,7 @@ const Gallery: React.FC = () => {
       }
     }
   };
-
+ 
   const fileInputRef = React.createRef<HTMLInputElement>();
 
   const openFilePicker = () => {
