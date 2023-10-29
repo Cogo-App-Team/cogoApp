@@ -240,3 +240,37 @@ html {
   https://ionicframework.com/docs/layout/dynamic-font-scaling */
   --ion-dynamic-font: var(--ion-default-dynamic-font);
 }
+
+.menu-item {
+  padding: 10px 16px; /* Adjust padding as needed */
+  display: flex;
+  align-items: center;
+}
+
+.image-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.image-square {
+  width: calc(33.33% - 10px); /* Adjust the width to fit three images per row */
+  margin: 5px;
+  box-sizing: border-box;
+}
+
+.image-square img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+svg {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+
+.infinite-scroll-content {
+  text-align: center;
+  padding: 20px 0;
+}
