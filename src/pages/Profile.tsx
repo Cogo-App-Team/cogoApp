@@ -21,7 +21,7 @@ const Profile: React.FC = () => {
       </IonHeader>
       <IonContent>
         <IonAvatar>
-          <img src="user-profile-image.jpg" alt="User Profile" />
+          <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="User Profile" />
         </IonAvatar>
         <IonLabel>User Name</IonLabel>
       </IonContent>

@@ -1,0 +1,47 @@
+
+### **Nagivation functionality Testsuit Overview**
+
+#******************** Settings ************************
+
+*** Settings ***
+
+Documentation	Testing the app navigation.
+
+Pre Condition	Open Browser, Login
+Post Condition	Logout, Close All Browsers
+Tags	Nagivation, TS-6-Navigation
+
+#******************* Common Variables ********************
+
+*** Variables ***
+
+HomeUrl=http://localhost:8100/home
+LoginUrl= http://localhost:8100/login
+ProfileUrl= http://localhost:8100/profile
+SettingsUrl= http://localhost:8100/settings
+GalleryUrl= http://localhost:8100/gallery
+CameraUrl= http://localhost:8100/photo
+
+#******************** Test Cases *************************
+
+*** Test Cases ***
+
+# Positive Test
+
+Navigate between Sidebar menu items
+	Navigate to Home Page	HomeUrl
+	Select Sidebar menu
+	Select different Sidebar menu items one by one Camera -> Gallery -> Settings -> Profile
+	Verify that pages open when selected
+ 	
+Navigate between Footer Icon buttons
+	Navigate to Home Page	HomeUrl
+	Select different Footer Icon buttons one by one Home -> Camera -> Gallery
+	Verify that pages open when selected
+
+Logout
+	Navigate to Home Page	HomeUrl
+	Select Sidebar menu
+	Select Logout item
+	Verify that user is logged out and Login page showed
+

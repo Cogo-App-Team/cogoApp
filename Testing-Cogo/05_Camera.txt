@@ -1,0 +1,31 @@
+
+### **Camera functionality Testsuit Overview**
+
+#******************** Settings ************************
+
+*** Settings ***
+
+Documentation	Testing camera functionality. 
+
+Pre Condition	Open Browser, Login
+Post Condition	Logout, Close All Browsers
+Tags	Camera, TS-5-Camera
+
+#******************* Common Variables ********************
+
+*** Variables ***
+
+CameraUrl= http://localhost:8100/photo
+Empty= 
+
+#******************** Test Cases *************************
+
+*** Test Cases ***
+
+# Positive Test
+
+Open Camera Page
+	Navigate to Camera Page	  CameraUrl
+	Verify that Page shows Add to your collection button
+ 	
+# Negative Test
