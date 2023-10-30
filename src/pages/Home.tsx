@@ -1,5 +1,16 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import React from 'react';
+import {
+  IonPage,
+  IonContent,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonButton,
+  IonIcon,
+  IonButtons,
+  IonMenuButton,
+} from '@ionic/react';
+import { camera, images, settings, person } from 'ionicons/icons';
 import './Home.css';
 
 // testing git connection -sini
@@ -9,17 +20,14 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Blank</IonTitle>
+        <IonMenuButton slot="start" />
+          <IonTitle>Home</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Blank</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer />
-      </IonContent>
+      <IonContent className="ion-padding ion-text-center" >
+    Welcome to the Cogo Collection!
+</IonContent>
+
     </IonPage>
   );
 };
