@@ -1,0 +1,81 @@
+
+### **User Registration functionality Testsuit Overview**
+
+#******************** Settings ************************
+
+*** Settings ***
+
+Documentation	Testing the User Registration functionality. User Registration Test scenario with valid, invalid and missing credentials.
+
+Pre Condition	ionic serve command to open app on Browser
+Post Condition	Close All Browsers
+Tags Registration, TS-0-Register
+
+#******************* Common Variables ********************
+
+*** Variables ***
+
+RegisterUrl= http://localhost:8100/login/signup
+Email= XYZ@student.laurea.fi
+Password= ********
+Invalid_Email= XX@student.laurea.fi
+Invalid_Password= ***
+Empty= 
+
+#******************** Test Cases *************************
+
+*** Test Case ***
+
+# Positive Test
+
+Register user with valid username and password 
+	Navigate To Register Page  RegisterUrl
+	Input Email  Email
+    	Input Password  Password
+	Input Password Again  Password
+    	Submit Register Form by clicking Sign Up
+    	Verify Page Should Contain Message Welcome to the Cogo Collection!
+	
+
+# Negative Test
+
+Register With Email Second Time
+	Navigate To Register Page  RegisterUrl
+	Input Email  Email
+	Input Password  Password
+	Input Password Again  Password
+	Submit Register Form by clicking Sign Up
+	Verify That Error message should show Firebase: Error (auth/email-already-in-use).
+
+Register With Invalid Email
+	Navigate To Register Page  RegisterUrl
+	Input Email  Invalid_Email
+	Input Password  Password
+	Input Password Again  Password
+	Submit Register Form by clicking Sign Up
+	Verify That Error message should show Firebase: Error (auth/invalid-email).
+
+Register With Invalid Password
+	Navigate To Register Page  RegisterUrl
+	Input Email  Email
+	Input Password  Invalid_Password
+	Input Password  Again  Invalid_Password
+	Submit Register Form by clicking Sign Up
+	Verify That Error message should show Firebase: Password should be at least 6 characters (auth/weak-password).
+
+Register With Empty Email
+	Navigate To Register Page  RegisterUrl
+	Input Email  Empty
+	Input Password  Password
+	Input Password Again  Password
+	Submit Register Form by clicking Sign Up
+	Verify That Registration cannot be completed without Email
+
+Register With Empty Password
+	Navigate To Register Page  RegisterUrl
+	Input Email  Email
+	Input Password  Empty
+	Input Password Again  Empty
+    	Submit Register Form by clicking Sign Up
+	Verify That Registration cannot be completed without Password
+
