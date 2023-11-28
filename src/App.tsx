@@ -17,7 +17,7 @@ import {
   IonMenuButton,
   setupIonicReact,
 } from '@ionic/react';
-import { home, camera, images, settings, person, logOut } from 'ionicons/icons';
+import { home, camera, images, settings, person, logOut, chatbox, apps, add } from 'ionicons/icons';
 import { Redirect, Route, BrowserRouter as Router } from 'react-router-dom';
 import Home from './pages/Home';
 import Photo from './pages/Photo';
@@ -130,12 +130,20 @@ const App: React.FC = () => {
                 <IonIcon icon={home} />
                 <IonLabel></IonLabel>
               </IonTabButton>
-              <IonTabButton tab="tab2" href="/photo">
-                <IonIcon icon={camera} />
+              <IonTabButton tab="tab2" href="/gallery">
+                <IonIcon icon={apps} />
                 <IonLabel></IonLabel>
               </IonTabButton>
-              <IonTabButton tab="tab3" href="/gallery">
-                <IonIcon icon={images} />
+              <IonTabButton tab="tab3" href="/photo">
+                <IonIcon icon={add} />
+                <IonLabel></IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="tab4" href="/contact">
+                <IonIcon icon={chatbox} />
+                <IonLabel></IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="tab5" href="/profile">
+                <IonIcon icon={person} />
                 <IonLabel></IonLabel>
               </IonTabButton>
             </IonTabBar>
