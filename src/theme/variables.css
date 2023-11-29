@@ -4,12 +4,28 @@ http://ionicframework.com/docs/theming/ */
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
-  --ion-color-primary: #3880ff;
+  --ion-color-primary: #15104D;
   --ion-color-primary-rgb: 56, 128, 255;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
   --ion-color-primary-shade: #3171e0;
   --ion-color-primary-tint: #4c8dff;
+
+    /** favorite **/
+  --ion-color-favorite: #FAC49E;
+  --ion-color-favorite-rgb: 105, 187, 123;
+  --ion-color-favorite-contrast: #ffffff;
+  --ion-color-favorite-contrast-rgb: 255, 255, 255;
+  --ion-color-favorite-shade: #FCDDC7;
+  --ion-color-favorite-tint: #FCDDC7;
+
+    /** custom **/
+  --ion-color-custom-button-color: #FCDDC7;
+  --ion-color-custom-button-color-rgb: 252, 221, 199;
+  --ion-color-custom-button-color-contrast: #ffffff;
+  --ion-color-custom-button-color-contrast-rgb: 255, 255, 255;
+  --ion-color-custom-button-color-shade: #fcddc79f;
+  --ion-color-custom-button-color-tint: #fcddc79f;
 
   /** secondary **/
   --ion-color-secondary: #3dc2ff;
@@ -273,4 +289,281 @@ svg {
 .infinite-scroll-content {
   text-align: center;
   padding: 20px 0;
+}
+
+/*Login page*/
+.ion-color-favorite {
+  --ion-color-base: var(--ion-color-favorite);
+  --ion-color-base-rgb: var(--ion-color-favorite-rgb);
+  --ion-color-contrast: var(--ion-color-favorite-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-favorite-contrast-rgb);
+  --ion-color-shade: var(--ion-color-favorite-shade);
+  --ion-color-tint: var(--ion-color-favorite-tint);
+}
+
+.ion-color-custom-button-color {
+  --ion-color-base: var(--ion-color-custom-button-color);
+  --ion-color-base-rgb: var(--ion-color-custom-button-color-rgb);
+  --ion-color-contrast: var(--ion-color-custom-button-color-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-custom-button-color-contrast-rgb);
+  --ion-color-shade: var(--ion-color-custom-button-color-shade);
+  --ion-color-tint: var(--ion-color-custom-button-color-tint);
+}
+
+.custom-element {
+  background-color: var(--ion-color-favorite);
+  color: var(--ion-color-favorite-contrast);
+}
+
+
+.custom-app {
+  --background: #FAC49E;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background);
+}
+
+.custom-card {
+  --background: #FAC49E;
+  --header-color: #15104D;
+  --input-background: #ffffff;
+  --input-color: #111111;
+  --button-background: #FCDDC7;
+  --button-color: #15104D;
+  --button-border-radius: 90px;
+
+  background-color: var(--background);
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  margin-top: 15%;
+}
+
+.custom-card h1 {
+  margin-top: 10%;
+  color: var(--header-color);
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.subtext {
+  color: #64618A;
+  font-size: 1.1em;
+}
+
+.custom-card .form-container {
+  margin-top: 10%;
+  width: 90%;
+}
+
+/*Email and password*/
+.custom-card .custom-input {
+  margin-bottom: 12px;
+  --background: var(--input-background);
+  --color: var(--input-color);
+  --border-radius: 0px;
+  text-align: left;
+}
+
+.custom-card .ion-input::placeholder {
+  color: var(--input-color);
+}
+
+/* .custom-card .ion-button .custom-button {
+  background-color: #FCDDC7;
+  color: #111111;
+  border-radius: 100px;
+  font-weight: bold;
+} */
+
+
+
+.custom-card .ion-button {
+  --background: var(--button-background);
+  --color: var(--button-color);
+  --border-radius: var(--button-border-radius);
+  font-weight: bold;
+}
+
+.custom-card p.footer {
+  margin-top: auto;
+  margin-bottom: 10%;
+  color: #15104D;
+}
+
+/* .ion-button {
+  --background: #FCDDC7;
+  --color: #111111;
+  --border-radius: 70px;
+}
+ */
+/* .rounded-button {
+  --background: #FCDDC7;
+  --color: #111111;
+  border-radius: 50px;
+}
+ */
+.forgot-password-link {
+  color: #15104D;
+}
+
+.signup-link {
+  color: #15104D;
+}
+
+/*ForgotPassword page*/
+.forgot-password-page {
+  background-color: #FAC49E;
+  width: 90%;
+  max-width: 100%;
+  margin: 0 auto;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.logo2 {
+  width: 100px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  margin-top: 45%;
+  margin-bottom: 10%;
+}
+
+.forgot-password-page .header-container {
+  padding: 5% 0;
+}
+
+.forgot-password-page h1 {
+  color: #15104D;
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-top: 5%;
+}
+
+.subtext2 {
+  color: #64618A;
+  font-size: 1.1em;
+}
+
+.forgot-password-page .form-container {
+  width: 95%;
+  margin-top: 12%;
+}
+
+.forgot-password-page .custom-input {
+  --background: #ffffff;
+  --color: #111111;
+  --border-radius: 0px;
+  margin-bottom: 10px;
+}
+
+.forgot-password-page .custom-button {
+  background-color: var(--ion-color-custom-button-color);
+  color: var(--ion-color-custom-button-color-contrast);
+  --border-radius: var(--button-border-radius);
+  color: #15104D;
+  font-weight: bold;
+}
+
+.custom-button {
+  --background: var(--button-background);
+  --color: var(--button-color);
+  --border-radius: var(--button-border-radius);
+  color: #15104D;
+}
+
+
+.forgot-password-page .footer-container {
+  padding: 20%;
+  margin-top: 80%;
+  margin-bottom: 15%;
+  color: #15104D;
+}
+
+.signup-link {
+  color: #15104D;
+}
+
+/* Signup page */
+.signup-page {
+  --background: #FAC49E;
+  background-color: var(--background);
+  width: 90%;
+  max-width: 100%;
+  margin: 0 auto;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.logo3 {
+  width: 100px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  margin-top: 15%;
+}
+
+.signup-page .header-container {
+  padding: 5% 0;
+}
+
+.signup-page h1 {
+  color: #15104D;
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-top: 5%;
+}
+
+.signup-page .form-container {
+  width: 95%;
+  margin-top: 10%;
+}
+
+.signup-page .custom-input {
+  --background: #ffffff;
+  --color: #111111;
+  --border-radius: 0px;
+  margin-bottom: 15px;
+}
+
+.signup-page .custom-button {
+  background-color: var(--ion-color-custom-button-color);
+  color: var(--ion-color-custom-button-color-contrast);
+  --border-radius: var(--button-border-radius);
+  font-weight: bold;
+}
+
+.signup-page .footer-container {
+  padding: 20%;
+  margin-top: 95%;
+  margin-bottom: 10%;
+  color: #15104D;
+}
+
+.signup-link {
+  color: #15104D;
 }
