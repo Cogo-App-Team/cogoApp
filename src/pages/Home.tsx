@@ -10,10 +10,7 @@ import {
   IonButtons,
   IonMenuButton,
 } from '@ionic/react';
-import { camera, images, settings, person } from 'ionicons/icons';
 import './Home.css';
-
-// testing git connection -sini
 
 const Home: React.FC = () => {
   return (
