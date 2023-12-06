@@ -70,10 +70,11 @@ const Photo: React.FC = () => {
 
   return (
     <IonPage>
+      <div className="custom-app"></div>
     <IonHeader>
       <IonToolbar>
       <IonMenuButton slot="start" />
-        <IonTitle>Photo Page</IonTitle>
+        <IonTitle>Item</IonTitle>
       </IonToolbar>
     </IonHeader>
     <IonContent className="ion-padding">
