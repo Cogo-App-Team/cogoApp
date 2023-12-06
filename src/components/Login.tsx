@@ -1,8 +1,9 @@
 import React, { useRef, useState, useEffect } from "react";
-import { IonCard, IonButton, IonInput, IonAlert } from "@ionic/react";
+import { IonCard, IonButton, IonInput, IonAlert, IonApp } from "@ionic/react";
 import { Link, useHistory } from "react-router-dom";
 import { auth } from "../firebase";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import logo from "/logo.png";
 
 const Login: React.FC = () => {
   const emailRef = useRef<HTMLIonInputElement>(null);
@@ -39,22 +40,42 @@ const Login: React.FC = () => {
   
 
   return (
-    <IonCard>
-      <h2 className="ion-text-center">Log In</h2>
-      {error && <IonAlert isOpen={true} header="Error" message={error} buttons={["OK"]} />}
-      <IonInput type="email" ref={emailRef} placeholder="Email"></IonInput>
-      <IonInput type="password" ref={passwordRef} placeholder="Password"></IonInput>
-      <IonButton expand="full" onClick={handleSubmit} disabled={loading}>
-        Log In
-      </IonButton>
-      <p className="ion-text-center">
-         <Link to="/login/forgot-password">Forgot Password?</Link>
-      </p>
-      <p className="ion-text-center">
-           Need an account? <Link to="/login/signup">Sign Up</Link>
-      </p>
-
-    </IonCard>
+    <div className="custom-app">
+    <IonCard className="custom-card">
+      <img src={logo} alt="Logo" className="logo" />
+          <h1 className="ion-text-center header">Login</h1>
+          <p className="ion-text-center subtext">Log in to your Cogo account.</p>
+          {error && <IonAlert isOpen={true} header="Error" message={error} buttons={["OK"]} />}
+          <div className="form-container">
+            <IonInput
+              className="custom-input"
+              type="email"
+              ref={emailRef}
+              placeholder="Email"
+            ></IonInput>
+            <IonInput
+              className="custom-input"
+              type="password"
+              ref={passwordRef}
+              placeholder="Password"
+            ></IonInput>
+            <IonButton
+              className="ion-button"
+              expand="full"
+              onClick={handleSubmit}
+              disabled={loading}
+            >
+               Login
+          </IonButton>
+          <p className="ion-text-center">
+            <Link to="/login/forgot-password" className="forgot-password-link">Forgot Password?</Link>
+          </p>
+        </div>
+        <p className="ion-text-center footer">
+          Need an account? <Link to="/login/signup" className="signup-link">Sign Up</Link>
+        </p>
+      </IonCard>
+    </div>
   );
 };
 
