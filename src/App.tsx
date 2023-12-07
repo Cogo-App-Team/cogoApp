@@ -6,7 +6,6 @@ import {
   IonContent,
   IonHeader,
   IonToolbar,
-  IonTitle,
   IonMenu,
   IonList,
   IonItem,
@@ -14,14 +13,13 @@ import {
   IonTabBar,
   IonTabButton,
   IonRouterOutlet,
-  IonMenuButton,
   setupIonicReact,
 } from '@ionic/react';
-import { home, camera, images, settings, person, logOut, chatbox, apps, add } from 'ionicons/icons';
+import { home, camera, settings, person, logOut, chatbox, apps, add } from 'ionicons/icons';
 import { Redirect, Route, BrowserRouter as Router } from 'react-router-dom';
 import Home from './pages/Home';
 import Photo from './pages/Photo';
-import Gallery from './pages/Gallery';
+import Collections from './pages/Collections';
 import Settings from './pages/Settings';
 import Profile from './pages/Profile';
 import Login from './components/Login';
@@ -40,8 +38,6 @@ import '@ionic/react/css/text-transformation.css';
 import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
 import './theme/variables.css';
-import { Camera } from '@capacitor/camera';
-import Collections from './pages/Collections';
 import Item from './pages/Item';
 
 setupIonicReact();
