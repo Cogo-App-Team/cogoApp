@@ -41,6 +41,8 @@ import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import { Camera } from '@capacitor/camera';
+import Collections from './pages/Collections';
+import Item from './pages/Item';
 
 setupIonicReact();
 
@@ -79,12 +81,12 @@ const App: React.FC = () => {
           <IonContent>
             <IonList>
               <IonItem button routerLink="/photo">
-                <IonIcon icon={camera} />
-                <IonLabel>Camera</IonLabel>
+                <IonIcon icon={add} />
+                <IonLabel>Add Item</IonLabel>
               </IonItem>
-              <IonItem button routerLink="/gallery">
-                <IonIcon icon={images} />
-                <IonLabel>Gallery</IonLabel>
+              <IonItem button routerLink="/collections">
+                <IonIcon icon={apps} />
+                <IonLabel>Collections</IonLabel>
               </IonItem>
               <IonItem button routerLink="/settings">
                 <IonIcon icon={settings} />
@@ -121,7 +123,8 @@ const App: React.FC = () => {
             <IonRouterOutlet>
               <Route path="/home" component={Home} exact />
               <Route path="/photo" component={Photo} exact />
-              <Route path="/gallery" component={Gallery} exact />
+              <Route path="/collections" component={Collections} exact />
+              <Route path="/item" component={Item} exact />
               <Route path="/settings" component={Settings} exact />
               <Route path="/profile" component={Profile} exact />
             </IonRouterOutlet>
@@ -130,7 +133,7 @@ const App: React.FC = () => {
                 <IonIcon icon={home} />
                 <IonLabel></IonLabel>
               </IonTabButton>
-              <IonTabButton tab="tab2" href="/gallery">
+              <IonTabButton tab="tab2" href="/collections">
                 <IonIcon icon={apps} />
                 <IonLabel></IonLabel>
               </IonTabButton>
