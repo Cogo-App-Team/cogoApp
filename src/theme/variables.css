@@ -567,3 +567,25 @@ svg {
 .signup-link {
   color: #15104D;
 }
+
+/* New styles for collections and item pages elements */
+.background-new {
+  --background: var(--ion-color-favorite);
+}
+
+.button-new {
+  --background: var(--ion-color-favorite-shade);
+  --color: #15104D;
+  --border-radius: var(--button-border-radius);
+  font-weight: bold;
+}
+
+.button-new-cancel {
+  --background: #F3F5FF;
+  --color: #15104D;
+  --border-radius: var(--button-border-radius);
+}
+
+.card-new {
+  --background: #F3F5FF;
+}

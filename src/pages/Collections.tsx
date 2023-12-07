@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   IonPage,
@@ -19,7 +19,7 @@ import {
   IonToast,
   IonMenuButton,
 } from '@ionic/react';
-import { addOutline } from 'ionicons/icons';
+import { addOutline, createOutline, arrowForwardOutline } from 'ionicons/icons';
 
 const CollectionsPage: React.FC = () => {
 
@@ -30,6 +30,7 @@ const CollectionsPage: React.FC = () => {
   const [tags, setTags] = useState('');
   const [collections, setCollections] = useState<string[]>(['Coins', 'Stamps', 'Swords']);
   const [showToast, setShowToast] = useState(false);
+  const [editingIndex, setEditingIndex] = useState<number | null>(null);
 
   const addCollection = () => {
     if (collectionName.trim() !== '') {
@@ -46,16 +47,26 @@ const CollectionsPage: React.FC = () => {
     }
   };
 
+  const editCollection = (index: number) => {
+    setEditingIndex(index);
+    setCollectionName(collections[index]);
+    setShowModal(true);
+  };
+
   const navigateToItemsPage = () => {
-    // Use the useHistory hook to navigate to the "Items" page
-    history.push('/item'); // Replace '/items' with the correct path to your "Items" page
+    history.push('/swords');
   };
   
-  const handleCollectionClick = (collection: string) => {
-    if (collection === 'Swords') {
-      navigateToItemsPage();
+  const navigateToEditCollection = () => {
+    const editedCollection = collections[editingIndex!];
+    history.push(`/item/${encodeURIComponent(editedCollection)}`);
+  };
+
+  const handleCollectionClick = (index: number) => {
+    if (editingIndex !== null) {
+      navigateToEditCollection();
     } else {
-      history.push(`/item/${collection}`); 
+      navigateToItemsPage();
     }
   };
   
@@ -72,15 +83,17 @@ const CollectionsPage: React.FC = () => {
           </IonButton>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
+      <IonContent class="background-new">
         <IonGrid>
           <IonRow>
             {collections.map((collection, index) => (
-              <IonCol key={index} size="4" onClick={() => handleCollectionClick(collection)}>
-                <IonCard>
+              <IonCol key={index} size="4" onClick={() => handleCollectionClick(index)}>
+                <IonCard className="card-new">
                   <IonCardContent>
                     <IonLabel>{collection}</IonLabel>
-                  </IonCardContent>
+                    <IonIcon icon={createOutline} onClick={() => editCollection(index)} />
+                    <IonIcon icon={arrowForwardOutline} onClick={() => handleCollectionClick(index)} />                  
+                    </IonCardContent>
                 </IonCard>
               </IonCol>
             ))}
@@ -88,8 +101,8 @@ const CollectionsPage: React.FC = () => {
         </IonGrid>
       </IonContent>
 
-      {/* Add Modal */}
-      <IonModal isOpen={showModal}>
+        {/* Add/Edit Modal */}
+        <IonModal isOpen={showModal}>
         <IonContent>
           <IonLabel>Collection Name</IonLabel>
           <IonInput value={collectionName} onIonChange={(e) => setCollectionName(e.detail.value!)}></IonInput>

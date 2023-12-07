@@ -24,7 +24,7 @@ import {
 import { addOutline, camera } from 'ionicons/icons';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
-const ItemPage: React.FC = () => {
+const ItemSword: React.FC = () => {
 
   const [selectedCollection, setSelectedCollection] = useState<string>('');
 
@@ -79,12 +79,13 @@ const ItemPage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
 
-      <IonContent>
+      <IonContent class="background-new">
         <IonGrid>
           <IonRow>
             {items.map((item, index) => (
               <IonCol key={index} size="4">
-                <IonCard>
+                <IonCard className="card-new">
+
                   <IonCardContent>
                     <IonLabel>{item}</IonLabel>
                   </IonCardContent>
@@ -160,4 +161,4 @@ const ItemPage: React.FC = () => {
   );
 };
 
-export default ItemPage;
+export default ItemSword;
