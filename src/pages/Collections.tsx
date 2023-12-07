@@ -1,127 +1,124 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
-  IonPage, IonHeader, IonToolbar, IonTitle, IonContent,
-  IonCard, IonCardContent, IonGrid, IonRow, IonCol,
-  IonMenuButton, IonLabel, IonButton, IonIcon, IonModal, IonInput
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonButton,
+  IonIcon,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonCard,
+  IonCardContent,
+  IonModal,
+  IonInput,
+  IonLabel,
+  IonToast,
+  IonMenuButton,
 } from '@ionic/react';
-import { add } from 'ionicons/icons';
-import {
-  addDoc, collection, onSnapshot, query, orderBy, Timestamp
-} from 'firebase/firestore';
-import { db } from '../firebase';
+import { addOutline } from 'ionicons/icons';
 
-interface MyCollection {
-  id: string;
-  name: string;
-  description: string;
-  tags: string;
-  imageUrl: string;
-}
+const CollectionsPage: React.FC = () => {
 
-const Collections: React.FC = () => {
+  const history = useHistory<any>(); 
   const [showModal, setShowModal] = useState(false);
-  const [showAddCollectionModal, setShowAddCollectionModal] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<MyCollection>({ id: '', name: '', description: '', tags: '', imageUrl: '' });
-  const [newCollection, setNewCollection] = useState<{ name: string; description: string; tags: string }>({ name: '', description: '', tags: '' });
-  const [items, setItems] = useState<MyCollection[]>([]);
-  const userCollectionsRef = collection(db, 'userCollections');
+  const [collectionName, setCollectionName] = useState('');
+  const [collectionDescription, setCollectionDescription] = useState('');
+  const [tags, setTags] = useState('');
+  const [collections, setCollections] = useState<string[]>(['Coins', 'Stamps', 'Swords']);
+  const [showToast, setShowToast] = useState(false);
 
-  useEffect(() => {
-    const unsubscribe = onSnapshot(query(userCollectionsRef, orderBy('name')), (snapshot) => {
-      const collectionsData = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() } as MyCollection));
-      setItems(collectionsData);
-    });
-
-    return () => unsubscribe();
-  }, [userCollectionsRef]);
-
-  const openModal = (item: MyCollection) => {
-    setSelectedItem(item);
-    setShowModal(true);
-  };
-
-  const closeModal = () => setShowModal(false);
-
-  const openAddCollectionModal = () => setShowAddCollectionModal(true);
-
-  const closeAddCollectionModal = () => {
-    setShowAddCollectionModal(false);
-    setNewCollection({ name: '', description: '', tags: '' });
-  };
-
-  const saveNewCollection = async () => {
-    try {
-      // ... (unchanged)
-
-      const docRef = await addDoc(userCollectionsRef, {
-        ...newCollection,
-        imageUrl: 'url-to-default-image.jpg',
-        timestamp: Timestamp.now(),
-      });
-
-      const newItem = { id: docRef.id, ...newCollection, imageUrl: 'url-to-default-image.jpg' };
-      setItems([...items, newItem]);
-
-      closeAddCollectionModal();
-    } catch (error) {
-      console.error('Error adding collection to Firestore: ', error);
+  const addCollection = () => {
+    if (collectionName.trim() !== '') {
+      setCollections([...collections, collectionName]);
+      setShowModal(false);
+      // You can add further logic to save other details like description and tags.
+      setCollectionName('');
+      setCollectionDescription('');
+      setTags('');
+    } else {
+      // Handle error when collection name is not filled.
+      console.error('Collection name is required.');
+      setShowToast(true);
     }
   };
 
+  const navigateToItemsPage = () => {
+    // Use the useHistory hook to navigate to the "Items" page
+    history.push('/item'); // Replace '/items' with the correct path to your "Items" page
+  };
+  
+  const handleCollectionClick = (collection: string) => {
+    if (collection === 'Swords') {
+      navigateToItemsPage();
+    } else {
+      history.push(`/item/${collection}`); 
+    }
+  };
+  
+
   return (
     <IonPage>
-      <div className="custom-app"></div>
       <IonHeader>
         <IonToolbar>
-          <IonMenuButton slot="start" />
+        <IonMenuButton slot="start" />
+          <IonTitle>Collections</IonTitle>
+          <IonButton slot="end" onClick={() => setShowModal(true)}>
+            <IonIcon icon={addOutline} />
+            Add
+          </IonButton>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding">
+      <IonContent>
         <IonGrid>
           <IonRow>
-            <IonCol className="ion-text-center">
-              <h4>My Collections</h4>
-            </IonCol>
-            <IonCol />
-            <IonCol className="ion-text-center ion-align-items-center">
-              <IonButton shape="round" onClick={openAddCollectionModal}>
-                <IonIcon slot="start" icon={add} />
-                Add
-              </IonButton>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            {items.map((item) => (
-              <IonCol key={item.id} size="4">
-                <IonCard onClick={() => openModal(item)}>
-                  {item.imageUrl ? (
-                    <img src={item.imageUrl} alt={item.name} />
-                  ) : (
-                    <div>Missing Image</div>
-                  )}
-                  <div>{item.name}</div>
+            {collections.map((collection, index) => (
+              <IonCol key={index} size="4" onClick={() => handleCollectionClick(collection)}>
+                <IonCard>
+                  <IonCardContent>
+                    <IonLabel>{collection}</IonLabel>
+                  </IonCardContent>
                 </IonCard>
               </IonCol>
             ))}
           </IonRow>
         </IonGrid>
-        <IonModal isOpen={showModal}>
-          {/* ... (previous modal code) */}
-        </IonModal>
-        <IonModal isOpen={showAddCollectionModal}>
-          <IonContent>
-            {/* ... (unchanged) */}
-          </IonContent>
-          <IonButton onClick={closeAddCollectionModal} slot="end">
-            Cancel
-          </IonButton>
-          <IonButton onClick={saveNewCollection} slot="end">
-            Save
-          </IonButton>
-        </IonModal>
       </IonContent>
+
+      {/* Add Modal */}
+      <IonModal isOpen={showModal}>
+        <IonContent>
+          <IonLabel>Collection Name</IonLabel>
+          <IonInput value={collectionName} onIonChange={(e) => setCollectionName(e.detail.value!)}></IonInput>
+
+          <IonLabel>Collection Description</IonLabel>
+          <IonInput
+            value={collectionDescription}
+            onIonChange={(e) => setCollectionDescription(e.detail.value!)}
+          ></IonInput>
+
+          <IonLabel>Tags</IonLabel>
+          <IonInput value={tags} onIonChange={(e) => setTags(e.detail.value!)}></IonInput>
+
+          <IonButton onClick={() => setShowModal(false)}>Cancel</IonButton>
+          <IonButton onClick={addCollection}>Save</IonButton>
+        </IonContent>
+      </IonModal>
+
+      {/* Error Toast */}
+      <IonToast
+        isOpen={showToast}
+        onDidDismiss={() => setShowToast(false)}
+        message="Collection name is required."
+        duration={2000}
+        color="danger"
+        position="top"
+      />
     </IonPage>
   );
 };
 
-export default Collections;
+export default CollectionsPage;

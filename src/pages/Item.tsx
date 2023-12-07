@@ -1,109 +1,163 @@
 import React, { useState, useEffect } from 'react';
 import {
   IonPage,
-  IonContent,
   IonHeader,
   IonToolbar,
   IonTitle,
+  IonContent,
   IonButton,
   IonIcon,
-  IonFooter,
-  IonButtons,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonCard,
+  IonCardContent,
+  IonModal,
+  IonInput,
+  IonLabel,
+  IonToast,
   IonMenuButton,
+  IonItem,
+  IonSelect,
+  IonSelectOption,
 } from '@ionic/react';
-import { camera, cloudDownload } from 'ionicons/icons';
+import { addOutline, camera } from 'ionicons/icons';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { ref, uploadString, getDownloadURL } from '@firebase/storage';
-import { collection, addDoc } from '@firebase/firestore';
-import { storage, db } from '../firebase';
 
-const Photo: React.FC = () => {
+const ItemPage: React.FC = () => {
+
+  const [selectedCollection, setSelectedCollection] = useState<string>('');
+
+  const [showModal, setShowModal] = useState(false);
+  const [itemName, setItemName] = useState('');
+  const [itemDescription, setItemDescription] = useState('');
+  const [tags, setTags] = useState('');
+  const [items, setItems] = useState<string[]>(['Knife', 'Dagger', 'Sword']);
+  const [showToast, setShowToast] = useState(false);
   const [photoData, setPhotoData] = useState<string | undefined>(undefined);
 
-  const takePhoto = async () => {
-    try {
-      const image = await Camera.getPhoto({
-        resultType: CameraResultType.DataUrl,
-        source: CameraSource.Camera,
-      });
+  const addItem = () => {
+    if (itemName.trim() !== '') {
+      setItems([...items, itemName]);
+      setShowModal(false);
+      setItemName('');
+      setItemDescription('');
+      setTags('');
+    } else {
+      console.error('Item name is required.');
+      setShowToast(true);
+    }
+  };
 
-      if (image) {
-        const imageDataUrl = image.dataUrl;
-  
-        // Ensure imageDataUrl is defined before proceeding
-        if (imageDataUrl) {
+    const takePhoto = async () => {
+      try {
+        const image = await Camera.getPhoto({
+          resultType: CameraResultType.DataUrl,
+          source: CameraSource.Camera,
+        });
+    
+        if (image) {
+          const imageDataUrl = image.dataUrl;
           setPhotoData(imageDataUrl);
-  
-          // Upload photo to Firebase Storage
-          const storageRef = ref(storage, 'photos/my_photo.jpg');
-          await uploadString(storageRef, imageDataUrl, 'data_url');
-        } else {
-          console.error('Error: Image data URL is undefined.');
         }
+      } catch (error) {
+        console.error('Error taking photo: ', error);
       }
-    } catch (error) {
-      console.error('Error taking photo: ', error);
-    }
+
   };
-
-  const downloadPhoto = async () => {
-    if (photoData) {
-      // Download URL from Firebase Storage
-      const downloadUrl = await getDownloadURL(ref(storage, 'photos/my_photo.jpg'));
-      
-      // Trigger download (open in a new tab)
-      window.open(downloadUrl, '_blank');
-    }
-  };
-
-  // Example: Save photo URL to Firestore
-  useEffect(() => {
-    const savePhotoToFirestore = async () => {
-      if (photoData) {
-        const photosCollection = collection(db, 'photos');
-        await addDoc(photosCollection, { imageUrl: photoData });
-      }
-    };
-
-    savePhotoToFirestore();
-  }, [photoData, db]);
 
   return (
     <IonPage>
-      <div className="custom-app"></div>
-    <IonHeader>
-      <IonToolbar>
-      <IonMenuButton slot="start" />
-        <IonTitle>Item</IonTitle>
-      </IonToolbar>
-    </IonHeader>
-    <IonContent className="ion-padding">
-      {photoData ? (
-        <img src={photoData} alt="Taken" />
-      ) : (
-        <div className="ion-text-center">
-          <IonButton expand="full" onClick={takePhoto}>
-            <IonIcon icon={camera} />
-            <br />
-            Add to your collection
-          </IonButton>
-        </div>
-      )}
-    </IonContent>
-    <IonFooter>
-      {photoData && (
+      <IonHeader>
         <IonToolbar>
-          <IonButtons slot="primary">
-            <IonButton onClick={downloadPhoto}>
-              <IonIcon icon={cloudDownload} />
-              Download
-            </IonButton>
-          </IonButtons>
+          <IonMenuButton slot="start" />
+          <IonTitle>Items in Swords</IonTitle>
+          <IonButton slot="end" onClick={() => setShowModal(true)}>
+            <IonIcon icon={addOutline} />
+            Add
+          </IonButton>
         </IonToolbar>
-      )}
-    </IonFooter>
-  </IonPage>
+      </IonHeader>
+
+      <IonContent>
+        <IonGrid>
+          <IonRow>
+            {items.map((item, index) => (
+              <IonCol key={index} size="4">
+                <IonCard>
+                  <IonCardContent>
+                    <IonLabel>{item}</IonLabel>
+                  </IonCardContent>
+                </IonCard>
+              </IonCol>
+            ))}
+          </IonRow>
+        </IonGrid>
+      </IonContent>
+
+      {/* Add Modal */}
+     
+      <IonModal isOpen={showModal}>
+  <IonHeader>
+    <IonToolbar>
+      <IonTitle>Add Item</IonTitle>
+    </IonToolbar>
+  </IonHeader>
+  <IonContent>
+
+    {/* Take Photo Button */}
+    <IonButton onClick={takePhoto}>
+      <IonIcon icon={camera} />
+      Take Photo
+    </IonButton>
+
+    {/* Display Taken Photo */}
+    {photoData && <img src={photoData} alt="Taken" />}
+
+    {/* Your Item details input fields go here */}
+    <br></br>
+    <IonLabel>Item Name</IonLabel>
+    <IonInput value={itemName} onIonChange={(e) => setItemName(e.detail.value!)}></IonInput>
+
+          <IonLabel>Item Description</IonLabel>
+          <IonInput
+            value={itemDescription}
+            onIonChange={(e) => setItemDescription(e.detail.value!)}
+          ></IonInput>
+
+          <IonLabel>Tags</IonLabel>
+          <IonInput value={tags} onIonChange={(e) => setTags(e.detail.value!)}></IonInput>
+
+          <IonItem>
+    <IonLabel>Add to Collection</IonLabel>
+    <IonSelect
+      value={selectedCollection}
+      placeholder="Select Collection"
+      onIonChange={(e) => setSelectedCollection(e.detail.value)}
+    >
+      <IonSelectOption value="Coins">Coins</IonSelectOption>
+      <IonSelectOption value="Stamps">Stamps</IonSelectOption>
+      <IonSelectOption value="Swords">Swords</IonSelectOption>
+    </IonSelect>
+  </IonItem>
+
+  </IonContent>
+
+  <IonButton onClick={() => setShowModal(false)}>Cancel</IonButton>
+   <IonButton onClick={addItem}>Save</IonButton>
+</IonModal>
+
+      {/* Error Toast */}
+      <IonToast
+        isOpen={showToast}
+        onDidDismiss={() => setShowToast(false)}
+        message="Item name is required."
+        duration={2000}
+        color="danger"
+        position="top"
+      />
+    </IonPage>
   );
 };
 
-export default Photo;
+export default ItemPage;

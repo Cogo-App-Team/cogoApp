@@ -6,6 +6,7 @@ import {
   IonContent,
   IonHeader,
   IonToolbar,
+  IonTitle,
   IonMenu,
   IonList,
   IonItem,
@@ -13,13 +14,14 @@ import {
   IonTabBar,
   IonTabButton,
   IonRouterOutlet,
+  IonMenuButton,
   setupIonicReact,
 } from '@ionic/react';
-import { home, camera, settings, person, logOut, chatbox, apps, add } from 'ionicons/icons';
+import { home, camera, images, settings, person, logOut, chatbox, apps, add } from 'ionicons/icons';
 import { Redirect, Route, BrowserRouter as Router } from 'react-router-dom';
 import Home from './pages/Home';
 import Photo from './pages/Photo';
-import Collections from './pages/Collections';
+import Gallery from './pages/Gallery';
 import Settings from './pages/Settings';
 import Profile from './pages/Profile';
 import Login from './components/Login';
@@ -38,7 +40,7 @@ import '@ionic/react/css/text-transformation.css';
 import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
 import './theme/variables.css';
-import Item from './pages/Item';
+import { Camera } from '@capacitor/camera';
 
 setupIonicReact();
 
@@ -76,13 +78,13 @@ const App: React.FC = () => {
           </IonHeader>
           <IonContent>
             <IonList>
-              <IonItem button routerLink="/item">
+              <IonItem button routerLink="/photo">
                 <IonIcon icon={camera} />
-                <IonLabel>Add Item</IonLabel>
+                <IonLabel>Camera</IonLabel>
               </IonItem>
-              <IonItem button routerLink="/collections">
-                <IonIcon icon={apps} />
-                <IonLabel>Collections</IonLabel>
+              <IonItem button routerLink="/gallery">
+                <IonIcon icon={images} />
+                <IonLabel>Gallery</IonLabel>
               </IonItem>
               <IonItem button routerLink="/settings">
                 <IonIcon icon={settings} />
@@ -118,8 +120,8 @@ const App: React.FC = () => {
           <IonTabs>
             <IonRouterOutlet>
               <Route path="/home" component={Home} exact />
-              <Route path="/item" component={Item} exact />
-              <Route path="/collections" component={Collections} exact />
+              <Route path="/photo" component={Photo} exact />
+              <Route path="/gallery" component={Gallery} exact />
               <Route path="/settings" component={Settings} exact />
               <Route path="/profile" component={Profile} exact />
             </IonRouterOutlet>
@@ -128,11 +130,11 @@ const App: React.FC = () => {
                 <IonIcon icon={home} />
                 <IonLabel></IonLabel>
               </IonTabButton>
-              <IonTabButton tab="tab2" href="/collections">
+              <IonTabButton tab="tab2" href="/gallery">
                 <IonIcon icon={apps} />
                 <IonLabel></IonLabel>
               </IonTabButton>
-              <IonTabButton tab="tab3" href="/item">
+              <IonTabButton tab="tab3" href="/photo">
                 <IonIcon icon={add} />
                 <IonLabel></IonLabel>
               </IonTabButton>
