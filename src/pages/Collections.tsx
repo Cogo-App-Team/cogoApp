@@ -110,7 +110,7 @@ const Collections: React.FC = () => {
 
                   <IonCardContent>
                     <IonLabel>{collection}</IonLabel>
-                    <IonIcon icon={createOutline} onClick={() => editCollection(index)} className="button-new" />
+                    <IonIcon icon={createOutline} onClick={() => editCollection(index)} className="button-new" style={{ fontSize: '30px' }} />
                   </IonCardContent>
                 </IonCard>
               </IonCol>

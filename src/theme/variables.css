@@ -599,10 +599,11 @@ svg {
   --border-radius: 20px;
 }
 
-.card-custom {
+.card-new {
   --background: #F3F5FF;
 }
 
 .custom-input-padding {
   padding: 8px;
 }
+
