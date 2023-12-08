@@ -22,7 +22,7 @@ import {
   IonSelectOption,
 } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
-import { addOutline, camera, arrowForwardOutline } from 'ionicons/icons';
+import { addOutline, camera, arrowForwardOutline, arrowBackOutline } from 'ionicons/icons';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 const Items: React.FC = () => {
@@ -80,10 +80,6 @@ const Items: React.FC = () => {
           <IonTitle>Items</IonTitle>
           
 
-          
-          <IonButton slot="end" onClick={navigateToCollectionsPage} className="button-new button-new-items">
-  <IonIcon icon={arrowForwardOutline} />
-</IonButton>
 
           <IonButton slot="end" onClick={() => setShowModal(true)} className="button-new button-new-add">
             <IonIcon icon={addOutline} />
@@ -97,10 +93,29 @@ const Items: React.FC = () => {
 
       <IonContent class="background-new">
 
+      <IonGrid>
+          <IonRow>
+            <IonCol>
+              
+            </IonCol>
+            <IonCol>
+              
+            </IonCol>
+            <IonCol>
+             
+          
+          <IonButton onClick={navigateToCollectionsPage} className="button-new button-new-items">
+  <IonIcon icon={arrowBackOutline} />
+   Back to Collections
+</IonButton>
 
+            </IonCol>
+          </IonRow>
+        </IonGrid>
 
         <IonGrid>
           <IonRow>
+            
             {items.map((item, index) => (
               <IonCol key={index} size="4">
                 <IonCard className="card-new">
@@ -127,7 +142,7 @@ const Items: React.FC = () => {
   <IonContent>
 
     {/* Take Photo Button */}
-    <IonButton onClick={takePhoto}>
+    <IonButton onClick={takePhoto} className="button-new">
       <IonIcon icon={camera} />
       Take Photo
     </IonButton>
@@ -138,19 +153,19 @@ const Items: React.FC = () => {
     <br></br>
 
     {/* Your Item details input fields go here */}
-    <IonLabel>Item Name</IonLabel>
+    <IonLabel className="button-new">Item Name</IonLabel>
     <IonInput value={itemName} onIonChange={(e) => setItemName(e.detail.value!)}></IonInput>
 
-          <IonLabel>Item Description</IonLabel>
+          <IonLabel className="button-new">Item Description</IonLabel>
           <IonInput
             value={itemDescription}
             onIonChange={(e) => setItemDescription(e.detail.value!)}
           ></IonInput>
 
-          <IonLabel>Tags</IonLabel>
+          <IonLabel className="button-new">Tags</IonLabel>
           <IonInput value={tags} onIonChange={(e) => setTags(e.detail.value!)}></IonInput>
 
-          <IonItem>
+          <IonItem className="dropdown">
     <IonLabel>Add to Collection</IonLabel>
     <IonSelect
       value={selectedCollection}
@@ -165,8 +180,8 @@ const Items: React.FC = () => {
 
   </IonContent>
 
-  <IonButton onClick={() => setShowModal(false)}>Cancel</IonButton>
-   <IonButton onClick={addItem}>Save</IonButton>
+  <IonButton onClick={() => setShowModal(false)} className="button-new button-new-cancel">Cancel</IonButton>
+   <IonButton onClick={addItem} className="button-new">Save</IonButton>
 </IonModal>
 
       {/* Error Toast */}

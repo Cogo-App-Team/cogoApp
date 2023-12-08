@@ -580,6 +580,19 @@ svg {
   font-weight: bold;
 }
 
+.dropdown {
+  /* Custom styles for the IonSelect component */
+  border: 1px;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.ion-select-option {
+  /* Custom styles for IonSelectOption components */
+  background: var(--ion-color-favorite-shade);
+  color: #333;
+}
+
 .button-new-cancel {
   --background: #F3F5FF;
   --color: #15104D;
@@ -588,4 +601,8 @@ svg {
 
 .card-custom {
   --background: #F3F5FF;
+}
+
+.custom-input-padding {
+  padding: 8px;
 }

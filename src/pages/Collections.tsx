@@ -121,6 +121,11 @@ const Collections: React.FC = () => {
 
       {/* Add/Edit Modal */}
       <IonModal isOpen={showModal}>
+      <IonHeader>
+    <IonToolbar>
+      <IonTitle>Add Collection</IonTitle>
+    </IonToolbar>
+  </IonHeader>
         <IonContent>
           <IonLabel className="button-new">Collection Name</IonLabel>
           <IonInput
