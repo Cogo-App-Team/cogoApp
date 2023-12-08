@@ -576,16 +576,16 @@ svg {
 .button-new {
   --background: var(--ion-color-favorite-shade);
   --color: #15104D;
-  --border-radius: var(--button-border-radius);
+  --border-radius: 20px;
   font-weight: bold;
 }
 
 .button-new-cancel {
   --background: #F3F5FF;
   --color: #15104D;
-  --border-radius: var(--button-border-radius);
+  --border-radius: 20px;
 }
 
-.card-new {
+.card-custom {
   --background: #F3F5FF;
 }

@@ -21,10 +21,12 @@ import {
   IonSelect,
   IonSelectOption,
 } from '@ionic/react';
-import { addOutline, camera } from 'ionicons/icons';
+import { useHistory } from 'react-router-dom';
+import { addOutline, camera, arrowForwardOutline } from 'ionicons/icons';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
-const ItemSword: React.FC = () => {
+const Items: React.FC = () => {
+  const history = useHistory<any>(); 
 
   const [selectedCollection, setSelectedCollection] = useState<string>('');
 
@@ -63,7 +65,11 @@ const ItemSword: React.FC = () => {
       } catch (error) {
         console.error('Error taking photo: ', error);
       }
+  };
 
+  const navigateToCollectionsPage = () => {
+    // Use the history object to navigate to the Collections page
+    history.push('/collections'); // Replace '/collections' with the actual path of your Collections page
   };
 
   return (
@@ -71,15 +77,28 @@ const ItemSword: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonMenuButton slot="start" />
-          <IonTitle>Items in Swords</IonTitle>
-          <IonButton slot="end" onClick={() => setShowModal(true)}>
+          <IonTitle>Items</IonTitle>
+          
+
+          
+          <IonButton slot="end" onClick={navigateToCollectionsPage} className="button-new button-new-items">
+  <IonIcon icon={arrowForwardOutline} />
+</IonButton>
+
+          <IonButton slot="end" onClick={() => setShowModal(true)} className="button-new button-new-add">
             <IonIcon icon={addOutline} />
             Add
           </IonButton>
+
+
+
         </IonToolbar>
       </IonHeader>
 
       <IonContent class="background-new">
+
+
+
         <IonGrid>
           <IonRow>
             {items.map((item, index) => (
@@ -104,6 +123,7 @@ const ItemSword: React.FC = () => {
       <IonTitle>Add Item</IonTitle>
     </IonToolbar>
   </IonHeader>
+  
   <IonContent>
 
     {/* Take Photo Button */}
@@ -114,9 +134,10 @@ const ItemSword: React.FC = () => {
 
     {/* Display Taken Photo */}
     {photoData && <img src={photoData} alt="Taken" />}
+    
+    <br></br>
 
     {/* Your Item details input fields go here */}
-    <br></br>
     <IonLabel>Item Name</IonLabel>
     <IonInput value={itemName} onIonChange={(e) => setItemName(e.detail.value!)}></IonInput>
 
@@ -161,4 +182,4 @@ const ItemSword: React.FC = () => {
   );
 };
 
-export default ItemSword;
+export default Items;

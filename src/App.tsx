@@ -20,8 +20,7 @@ import { Redirect, Route, BrowserRouter as Router } from 'react-router-dom';
 import Home from './pages/Home';
 import Photo from './pages/Photo';
 import Collections from './pages/Collections';
-import Item from './pages/ItemSword';
-import ItemSword from './pages/ItemSword';
+import Items from './pages/Items';
 import Settings from './pages/Settings';
 import Profile from './pages/Profile';
 import Login from './components/Login';
@@ -40,7 +39,6 @@ import '@ionic/react/css/text-transformation.css';
 import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
 import './theme/variables.css';
-
 
 setupIonicReact();
 
@@ -122,8 +120,7 @@ const App: React.FC = () => {
               <Route path="/home" component={Home} exact />
               <Route path="/photo" component={Photo} exact />
               <Route path="/collections" component={Collections} exact />
-              <Route path="/item" component={Item} exact />
-              <Route path="/swords" component={ItemSword} exact />
+              <Route path="/items" component={Items} exact />
               <Route path="/settings" component={Settings} exact />
               <Route path="/profile" component={Profile} exact />
             </IonRouterOutlet>
