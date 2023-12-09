@@ -1,0 +1,31 @@
+
+### **Gallery functionality Testsuit Overview**
+
+#******************** Settings ************************
+
+*** Settings ***
+
+Documentation	Testing the Gallery functionality. 
+
+Pre Condition	Open Browser, Login
+Post Condition	Logout, Close All Browsers
+Tags	Gallery, TS-4-Gallery
+
+#******************* Common Variables ********************
+
+*** Variables ***
+
+GalleryUrl= http://localhost:8100/gallery
+
+
+#******************** Test Cases *************************
+
+*** Test Cases ***
+
+# Positive Test
+
+Open Gallery Page
+	Navigate to Gallery Page	GalleryUrl
+	Verify that Page shows Choose files
+ 	
+# Negative Test

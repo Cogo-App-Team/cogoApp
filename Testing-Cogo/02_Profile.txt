@@ -1,0 +1,34 @@
+
+### **Profile Page Testsuit Overview**
+
+#******************** Settings ************************
+
+*** Settings ***
+
+Documentation	Testing the Profile page.
+
+Pre Condition	Open App, Login
+Post Condition	Logout, Close All Browsers
+Tags	Profile, TS-2-Profile
+
+#******************* Common Variables ********************
+
+*** Variables ***
+
+ProfileUrl= http://localhost:8100/profile
+UserProfileImg= user-profile-image.jpg
+UserName= XZY
+Empty= 
+
+#******************** Test Cases *************************
+
+*** Test Cases ***
+
+# Positive Test
+
+Open Profile Page
+	Navigate to Profile Page	ProfileUrl
+	Verify that Page shows User Profile image and User Name
+ 	
+# Negative Test
+

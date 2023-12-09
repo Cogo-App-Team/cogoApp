@@ -1,0 +1,31 @@
+
+### **Settings Page Testsuit Overview**
+
+#******************** Settings ************************
+
+*** Settings ***
+
+Documentation	Testing the Settings page. 
+
+Pre Condition	Open Browser, Login
+Post Condition	Logout, Close All Browsers
+Tags	Settings, TS-3-Settings
+
+#******************* Common Variables ********************
+
+*** Variables ***
+
+SettingsUrl= http://localhost:8100/settings
+Empty= 
+
+#******************** Test Cases *************************
+
+*** Test Cases ***
+
+# Positive Test
+
+Open Settings Page
+	Navigate to Settings Page	SettingsUrl
+	Verify that Page shows Notifications toggle
+ 	
+# Negative Test
