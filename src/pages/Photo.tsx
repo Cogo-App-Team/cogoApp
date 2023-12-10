@@ -43,11 +43,11 @@ const Photo: React.FC = () => {
   };
 
   return (
-    <IonPage>
-      <IonHeader>
+    <IonPage className="photo-page">
+      <IonHeader className="photo-header">
         <IonToolbar>
         <IonMenuButton slot="start" />
-          <IonTitle>Photo Page</IonTitle>
+          <IonTitle>Create Item</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">

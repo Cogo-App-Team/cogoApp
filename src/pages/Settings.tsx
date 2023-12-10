@@ -26,50 +26,39 @@ const Settings: React.FC = () => {
   </IonToolbar>
 </IonHeader>
       <IonContent>
-        <IonList>
+        <IonList className="custom-list">
           <IonItem className="settings-custom-item">
-            <IonLabel>Enable SMS notifications</IonLabel>
-            <IonToggle className="custom-toggle" />
+            <IonToggle className="custom-toggle">Enable SMS notifications</IonToggle>
           </IonItem>
           <IonItem className="settings-custom-item">
-            <IonLabel>Favorite collections’ notifications</IonLabel>
-            <IonToggle className="custom-toggle" />
+          <IonToggle className="custom-toggle">Favorite collections’ notifications</IonToggle>
           </IonItem>
           <IonItem className="settings-custom-item">
-            <IonLabel>Enable email notifications</IonLabel>
-            <IonToggle className="custom-toggle" />
+          <IonToggle className="custom-toggle">Enable email notifications</IonToggle>
           </IonItem>
           <IonItem className="settings-custom-item">
-            <IonLabel>Enable lock screen notifications</IonLabel>
-            <IonToggle className="custom-toggle" />
+          <IonToggle className="custom-toggle">Enable lock screen notifications</IonToggle>
           </IonItem>
           <IonItem className="settings-custom-item">
-            <IonLabel>Enable marketing emails</IonLabel>
-            <IonToggle className="custom-toggle" />
+          <IonToggle className="custom-toggle">Enable marketing emails</IonToggle>
           </IonItem>
           <IonItem className="settings-custom-item">
-            <IonLabel>Private account</IonLabel>
-            <IonToggle className="custom-toggle" />
+          <IonToggle className="custom-toggle">Private account</IonToggle>
           </IonItem>
           <IonItem className="settings-custom-item">
-            <IonLabel>Private collections</IonLabel>
-            <IonToggle className="custom-toggle" />
+          <IonToggle className="custom-toggle">Private collections</IonToggle>
           </IonItem>
           <IonItem className="settings-custom-item">
-            <IonLabel>Allow followers</IonLabel>
-            <IonToggle className="custom-toggle" />
+          <IonToggle className="custom-toggle">Allow followers</IonToggle>
           </IonItem>
           <IonItem className="settings-custom-item">
-            <IonLabel>Enable notifications in my collections</IonLabel>
-            <IonToggle className="custom-toggle" />
+          <IonToggle className="custom-toggle">Enable notifications in my collections</IonToggle>
           </IonItem>
           <IonItem className="settings-custom-item">
-            <IonLabel>Enable location tracking</IonLabel>
-            <IonToggle className="custom-toggle" />
+          <IonToggle className="custom-toggle">Enable location tracking</IonToggle>
           </IonItem>
           <IonItem className="settings-custom-item">
-            <IonLabel>Enable offline mode</IonLabel>
-            <IonToggle className="custom-toggle" />
+          <IonToggle className="custom-toggle">Enable offline mode</IonToggle>
           </IonItem>
         </IonList>
       </IonContent>

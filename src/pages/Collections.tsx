@@ -66,8 +66,8 @@ const Collections: React.FC = () => {
   };
 
   return (
-    <IonPage>
-      <IonHeader>
+    <IonPage className="collections-page">
+      <IonHeader className="collections-header">
         <IonToolbar>
           <IonMenuButton slot="start" />
           <IonTitle>Collections</IonTitle>
