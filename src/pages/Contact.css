@@ -1,0 +1,54 @@
+
+
+.center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+  }
+  
+  .orange-background {
+    background-color: #ffa500;
+  }
+  
+  .text-container {
+    text-align: center;
+    margin-bottom: 70px; 
+    padding: 80px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+  
+  .secondary-text {
+    color: grey;
+    font-size: 1em;
+    margin-bottom: 300px; 
+  }
+
+  .button-container {
+    margin-top: 30px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  
+  .ion-content {
+    padding: 200px;
+  }
+  
+ 
+  .text-container,
+  .secondary-text,
+  .button-container {
+    margin-bottom: 40px; 
+  }
+  
+ 
+  ion-button {
+    border-radius: 100px;
+    margin-top: 30px;
+  }
+  

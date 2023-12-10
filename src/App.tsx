@@ -13,10 +13,25 @@ import {
   IonTabBar,
   IonTabButton,
   IonRouterOutlet,
-  setupIonicReact,
   IonTitle,
+  setupIonicReact,
 } from '@ionic/react';
-import { homeOutline, cameraOutline, gridOutline, addOutline, chatbubbleEllipsesOutline, personOutline, informationCircleOutline, logOutOutline, settingsOutline, add, apps, chatbox, home, person } from 'ionicons/icons';
+import {
+  homeOutline,
+  cameraOutline,
+  gridOutline,
+  addOutline,
+  chatbubbleEllipsesOutline,
+  personOutline,
+  informationCircleOutline,
+  logOutOutline,
+  settingsOutline,
+  add,
+  apps,
+  chatbox,
+  home,
+  person
+} from 'ionicons/icons';
 import { Redirect, Route, BrowserRouter as Router } from 'react-router-dom';
 import Home from './pages/Home';
 import Photo from './pages/Photo';
