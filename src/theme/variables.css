@@ -384,15 +384,6 @@ svg {
   color: var(--input-color);
 }
 
-/* .custom-card .ion-button .custom-button {
-  background-color: #FCDDC7;
-  color: #111111;
-  border-radius: 100px;
-  font-weight: bold;
-} */
-
-
-
 .custom-card .ion-button {
   --background: var(--button-background);
   --color: var(--button-color);
@@ -406,18 +397,7 @@ svg {
   color: #15104D;
 }
 
-/* .ion-button {
-  --background: #FCDDC7;
-  --color: #111111;
-  --border-radius: 70px;
-}
- */
-/* .rounded-button {
-  --background: #FCDDC7;
-  --color: #111111;
-  border-radius: 50px;
-}
- */
+
 .forgot-password-link {
   color: #15104D;
 }
@@ -567,3 +547,446 @@ svg {
 .signup-link {
   color: #15104D;
 }
+
+/* New styles for collections and item pages elements */
+.background-new {
+  --background: var(--ion-color-favorite);
+}
+
+.button-new {
+  --background: var(--ion-color-favorite-shade);
+  --color: #15104D;
+  --border-radius: 20px;
+  font-weight: bold;
+}
+
+.dropdown {
+  /* Custom styles for the IonSelect component */
+  border: 1px;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.ion-select-option {
+  /* Custom styles for IonSelectOption components */
+  background: var(--ion-color-favorite-shade);
+  color: #333;
+}
+
+.button-new-cancel {
+  --background: #F3F5FF;
+  --color: #15104D;
+  --border-radius: 20px;
+}
+
+.card-new {
+  --background: #F3F5FF;
+}
+
+.custom-input-padding {
+  padding: 8px;
+}
+
+/* App */
+.custom-tabs,
+.custom-tab-bar ion-tab-button::before,
+.custom-tab-bar ion-tab-button::after {
+  --ion-background-color: #FAC49E;
+}
+
+.custom-tab-bar ion-tab-button {
+  --color-selected: #15104D;
+  --color: #15104D;
+}
+
+ion-menu-button {
+  color: #000000;
+}
+
+ion-title {
+  color: #000000;
+}
+
+
+/* Home page */
+.custom-app.home-page-wrapper {
+  --background: #FAC49E;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background, #FAC49E);
+}
+
+.home-page-wrapper ion-header,
+.home-page-wrapper ion-toolbar,
+.home-page-wrapper ion-content {
+  --ion-background-color: var(--background, #FAC49E);
+}
+
+.custom-card {
+  --header-color: #15104D;
+  --button-background: #FCDDC7;
+  --button-color: #15104D;
+  --button-border-radius: 90px;
+
+  width: 90%;
+  max-width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+}
+
+.custom-card ion-card-header,
+.custom-card ion-card-content {
+  color: var(--header-color);
+}
+
+.custom-card ion-button {
+  --background: var(--button-background);
+  --color: var(--button-color);
+  --border-radius: var(--button-border-radius);
+  font-weight: bold;
+}
+
+.home-page-content.custom-card {
+  margin-top: 10%;
+  font-size: 1.5em;
+  color: #15104D;
+}
+
+ion-tab-bar,
+.home-page-wrapper ion-tab-bar ion-tab-button::before,
+.home-page-wrapper ion-tab-bar ion-tab-button::after {
+  --ion-background-color: var(--background, #FAC49E);
+}
+
+.home-page-wrapper ion-tab-bar ion-tab-button {
+  --color-selected: #15104D;
+  --color: #15104D;
+}
+
+/* Search Bar */
+.search-bar {
+  margin-top: 20px;
+}
+
+.search-bar ion-searchbar {
+  --background: #FFFFFF;
+  --border-radius: 10px;
+}
+
+.search-bar ion-searchbar .searchbar-input {
+  color: #15104D;
+}
+
+.search-bar ion-searchbar .searchbar-placeholder {
+  color: #8E8E93;
+}
+
+.search-bar ion-searchbar .searchbar-clear-icon {
+  color: #8E8E93;
+}
+
+.search-bar ion-searchbar .searchbar-icon {
+  color: #8E8E93;
+}
+
+.search-bar ion-searchbar .searchbar-cancel-button {
+  color: #15104D;
+}
+
+/* Big Card */
+.home-page-wrapper .big-card .custom-card {
+  background-color: #f0f1f1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  margin-bottom: 1%;
+}
+
+.home-page-wrapper .big-card .custom-card ion-card-header,
+.home-page-wrapper .big-card .custom-card ion-card-content {
+  color: var(--header-color); 
+  --ion-background-color: #f0f1f1;
+  border-bottom: 2px solid #cfcfd1;
+}
+
+.home-page-wrapper .big-card .custom-card ion-button {
+  --background: #FFAABB;
+  --color: #FFFFFF;
+}
+
+/* Big Card Image Styles */
+.custom-card .card-image-container {
+  max-width: 100%;
+  overflow: hidden; 
+  border-radius: 0 0 0 0;
+}
+
+.custom-card .card-image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Small Cards */
+.home-page-wrapper .small-cards .custom-card {
+  background-color: #f0f1f1;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-bottom: 15%;
+  color: #000000;
+}
+
+.home-page-wrapper .small-cards .custom-card ion-button {
+  --background: #f0f1f1;
+  --color: #FFFFFF;
+}
+
+/* IonIcons in small cards */
+.ion-icon-custom {
+  font-size: 24px;
+  color: #080808;
+  margin-bottom: 10px;
+}
+
+/* Medium cards */
+.home-page-wrapper .medium-cards {
+  margin-bottom: 20px;
+}
+
+.home-page-wrapper .medium-cards .custom-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0;
+  display: block;
+}
+
+.home-page-wrapper .medium-cards .custom-card {
+  background-color: #f0f1f1;
+  border-radius: 15px;
+  margin-bottom: 1%;
+  padding: 4%;
+  color: #000000;
+  border-bottom: 2px solid #cfcfd1;
+}
+
+.home-page-wrapper .medium-cards .custom-card ion-button {
+  --background: #f0f1f1;
+  --color: #15104D;
+  --font-weight: bold;
+}
+
+/* Settings Page Styling */
+.settings-page-wrapper {
+  --background: #FAC49E; 
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Header Styling */
+.settings-page-wrapper ion-header,
+.settings-page-wrapper ion-toolbar {
+  --ion-background-color: var(--background, #FAC49E);
+}
+
+/* Styling for the entire list area in the settings page */
+.settings-page-wrapper ion-content ion-list {
+  background-color: #FCDDC7;
+}
+
+
+/* Global styles for all pages */
+.custom-tabs,
+.custom-tab-bar ion-tab-button::before,
+.custom-tab-bar ion-tab-button::after {
+  --ion-background-color: #FAC49E;
+}
+
+.custom-tab-bar ion-tab-button {
+  --color-selected: #3e3741;
+  --color: #080808;
+}
+
+ion-menu-button,
+ion-title {
+  color: #000000;
+}
+
+/* Settings page header */
+.settings-page ion-header ion-toolbar {
+  --background: #FAC49E;
+  --color: white;
+}
+
+/* Bottom Tabs */
+.custom-tab-bar {
+  background-color: #FCDDC7;
+  color: white;
+  padding: 0.5em;
+}
+
+/* General Styling */
+body {
+  background-color: #FAC49E;
+  margin: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Menu Styles */
+
+:root {
+  --menu-background-color: #FCDDC7;
+}
+
+.menu-container {
+  --ion-background-color: #FAC49E;
+}
+
+.menu-container ion-menu {
+  --ion-background-color: #FCDDC7; 
+}
+
+.menu-container ion-header,
+.menu-container ion-toolbar {
+  --background: var(--ion-background-color);
+  color: #000000;
+  padding: 4%;
+  font-weight: bold;
+}
+
+.menu-container ion-list,
+.menu-container ion-item {
+  --background: var(--ion-background-color);
+  color: #000000;
+  font-weight: bold;
+}
+
+.menu-container ion-item ion-label,
+.menu-container ion-item ion-icon {
+  color: #000000;
+  margin-right: 8px;
+}
+
+.menu-container ion-menu ion-content {
+  --background: #FCDDC7;
+}
+
+
+/* Contact Page Styles */
+
+/* Header Title Styling */
+ion-title.top-header-title {
+  font-size: 1.2em;
+  color: #000000;
+}
+
+/* Contact Title Styling */
+.contact-title {
+  font-size: 2em;
+  color: #000000;
+}
+
+/* Contact Text Styling */
+.contact-text {
+  color: grey;
+  font-size: 1em;
+  padding-top: 10%;
+  margin-top: 20%;
+}
+
+/* Button Container Styling */
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 5%;
+  margin-bottom: 20%;
+}
+
+/* Custom Button Styling */
+.custom-button {
+  background-color: #FCDDC7;
+  color: #0e0d0d;
+  font-weight: bold;
+}
+
+/* Additional styling for the IonContent container, if needed */
+ion-content.ion-padding.center-content.contact-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5%;
+}
+
+/* Contact Page Header Styling */
+.contact-page .contact-header {
+  --background: #FAC49E;
+  --ion-color-base: #FAC49E;
+  --ion-toolbar-background: #FAC49E;/
+}
+
+/*About page*/
+
+/* Contact Page Header Styling */
+.about-page .about-header {
+  --background: #FAC49E;
+  --ion-color-base: #FAC49E;
+  --ion-toolbar-background: #FAC49E;
+  --ion-toolbar-color: #000000;
+}
+
+.text-container {
+color: #000000;
+}
+
+.center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; 
+  background-color: #fac49e; 
+}
+
+.text-container {
+  text-align: center;
+  margin: 20px; 
+}
+
+.description-text {
+  color: grey;
+  font-size: 1em;
+  margin-top: 15px; 
+}
+
+.contact-link {
+  margin-top: 20px;
+}
+
+ion-content {
+  padding: 20px;
+  height: 100%;
+}
+
+.line {
+  display: block;
+  margin-bottom: 10px; 
+}
+
+

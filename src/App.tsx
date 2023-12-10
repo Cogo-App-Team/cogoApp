@@ -6,6 +6,7 @@ import {
   IonContent,
   IonHeader,
   IonToolbar,
+  IonTitle,
   IonMenu,
   IonList,
   IonItem,
@@ -13,30 +14,14 @@ import {
   IonTabBar,
   IonTabButton,
   IonRouterOutlet,
-  IonTitle,
+  IonMenuButton,
   setupIonicReact,
 } from '@ionic/react';
-import {
-  homeOutline,
-  cameraOutline,
-  gridOutline,
-  addOutline,
-  chatbubbleEllipsesOutline,
-  personOutline,
-  informationCircleOutline,
-  logOutOutline,
-  settingsOutline,
-  add,
-  apps,
-  chatbox,
-  home,
-  person
-} from 'ionicons/icons';
-import { Redirect, Route, BrowserRouter as Router } from 'react-router-dom';
+import { homeOutline, cameraOutline, gridOutline, addOutline, chatbubbleEllipsesOutline, personOutline, informationCircleOutline, logOutOutline, settingsOutline, add } from 'ionicons/icons';
+import { Redirect, Route, BrowserRouter as Router, useHistory } from 'react-router-dom';
 import Home from './pages/Home';
 import Photo from './pages/Photo';
-import Collections from './pages/Collections';
-import Items from './pages/Items';
+import Gallery from './pages/Gallery';
 import Settings from './pages/Settings';
 import About from './pages/About';
 import Profile from './pages/Profile';
@@ -57,29 +42,33 @@ import '@ionic/react/css/text-transformation.css';
 import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
 import './theme/variables.css';
+import { Camera } from '@capacitor/camera';
 
 setupIonicReact();
 
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const history = useHistory();
 
   useEffect(() => {
     const auth = getAuth();
-
     onAuthStateChanged(auth, (user) => {
-      setIsAuthenticated(!!user);
+      if (user) {
+        setIsAuthenticated(true);
+      } else {
+        setIsAuthenticated(false);
+      }
     });
   }, []);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     const auth = getAuth();
-    signOut(auth).then(() => {
+    try {
+      await signOut(auth);
       setIsAuthenticated(false);
-    });
-
-    const menuButton = document.querySelector('ion-menu-button');
-    if (menuButton) {
-      menuButton.click();
+      history.push('/login');
+    } catch (error) {
+      console.error('Logout failed:', error);
     }
   };
 
@@ -129,52 +118,54 @@ const App: React.FC = () => {
             </IonContent>
           </IonMenu>
 
-        <IonRouterOutlet id="main-content">
-          <Route
-            path="/home"
-            render={() => (isAuthenticated ? <Home /> : <Redirect to="/login" />)}
-            exact
-          />
-          <Route path="/login" component={Login} exact />
-          <Route path="/login/forgot-password" component={ForgotPassword} exact />
-          <Route path="/login/signup" component={Signup} exact />
-          <Route path="/" render={() => <Redirect to="/home" />} exact />
-        </IonRouterOutlet>
-        
-        {isAuthenticated && (
-          <IonTabs>
-            <IonRouterOutlet>
-              <Route path="/home" component={Home} exact />
-              <Route path="/photo" component={Photo} exact />
-              <Route path="/collections" component={Collections} exact />
-              <Route path="/items" component={Items} exact />
-              <Route path="/settings" component={Settings} exact />
-              <Route path="/profile" component={Profile} exact />
-            </IonRouterOutlet>
-            <IonTabBar slot="bottom">
-              <IonTabButton tab="tab1" href="/home">
-                <IonIcon icon={home} />
-                <IonLabel></IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="tab2" href="/collections">
-                <IonIcon icon={apps} />
-                <IonLabel></IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="tab3" href="/photo">
-                <IonIcon icon={add} />
-                <IonLabel></IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="tab4" href="/contact">
-                <IonIcon icon={chatbox} />
-                <IonLabel></IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="tab5" href="/profile">
-                <IonIcon icon={person} />
-                <IonLabel></IonLabel>
-              </IonTabButton>
-            </IonTabBar>
-          </IonTabs>
-        )}
+          <IonRouterOutlet id="main-content" className="main-content">
+            <Route path="/home" component={Home} exact />
+            <Route path="/gallery" component={Gallery} exact />
+            <Route path="/photo" component={Photo} exact />
+            <Route path="/contact" component={Contact} exact />
+            <Route path="/profile" component={Profile} exact />
+            <Route path="/settings" component={Settings} exact />
+            <Route path="/about" component={About} exact />
+            <Route path="/login" component={Login} exact />
+            <Route path="/login/forgot-password" component={ForgotPassword} exact />
+            <Route path="/login/signup" component={Signup} exact />
+            <Route path="/" render={() => <Redirect to="/home" />} exact />
+          </IonRouterOutlet>
+
+          {isAuthenticated && (
+            <div className="tabs-container">
+              <IonTabs className="custom-tabs">
+                <IonRouterOutlet>
+                  <Route path="/home" component={Home} exact />
+                  <Route path="/gallery" component={Gallery} exact />
+                  <Route path="/photo" component={Photo} exact />
+                  <Route path="/contact" component={Contact} exact />
+                  <Route path="/profile" component={Profile} exact />
+                  <Route path="/settings" component={Settings} exact />
+                  <Route path="/about" component={About} exact />
+                  <Route path="/" render={() => <Redirect to="/home" />} exact />
+                </IonRouterOutlet>
+                <IonTabBar slot="bottom" className="custom-tab-bar">
+                  <IonTabButton tab="home" href="/home">
+                    <IonIcon icon={homeOutline} />
+                  </IonTabButton>
+                  <IonTabButton tab="gallery" href="/gallery">
+                    <IonIcon icon={gridOutline} />
+                  </IonTabButton>
+                  <IonTabButton tab="photo" href="/photo">
+                    <IonIcon icon={addOutline} />
+                  </IonTabButton>
+                  <IonTabButton tab="contact" href="/contact">
+                    <IonIcon icon={chatbubbleEllipsesOutline} />
+                  </IonTabButton>
+                  <IonTabButton tab="profile" href="/profile">
+                    <IonIcon icon={personOutline} />
+                  </IonTabButton>
+                </IonTabBar>
+              </IonTabs>
+            </div>
+          )}
+        </div>
       </Router>
     </IonApp>
   );

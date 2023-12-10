@@ -85,9 +85,6 @@ const Items: React.FC = () => {
             <IonIcon icon={addOutline} />
             Add
           </IonButton>
-
-
-
         </IonToolbar>
       </IonHeader>
 
@@ -104,10 +101,10 @@ const Items: React.FC = () => {
             <IonCol>
              
           
-          <IonButton onClick={navigateToCollectionsPage} className="button-new button-new-items">
-  <IonIcon icon={arrowBackOutline} />
-   Back to Collections
-</IonButton>
+            <IonButton onClick={navigateToCollectionsPage} className="button-new button-new-items">
+                <IonIcon icon={arrowBackOutline} />
+                Back to Collections
+              </IonButton>
 
             </IonCol>
           </IonRow>

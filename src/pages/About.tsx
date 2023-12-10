@@ -1,12 +1,19 @@
 import React from 'react';
-import { IonContent, IonPage, IonText, IonMenuButton } from '@ionic/react';
-import './About.css'; 
+import { IonContent, IonPage, IonText, IonMenuButton, IonButtons, IonHeader, IonTitle, IonToolbar } from '@ionic/react';
 import { Link } from 'react-router-dom'; 
 
 const About: React.FC = () => {
   return (
-    <IonPage>
-      <IonMenuButton slot="start" />
+    <IonPage className="about-page"> {/* Added a class here */}
+      <IonHeader className="about-header"> {/* Added a class to the header */}
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonMenuButton />
+          </IonButtons>
+          <IonTitle className="top-header-title">About</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+
       <IonContent className="ion-padding center-content">
         <div className="text-container">
           <IonText className="line" color="black" style={{ fontSize: '2em', fontWeight: 'bold' }}>
