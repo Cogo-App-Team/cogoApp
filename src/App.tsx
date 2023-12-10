@@ -14,15 +14,18 @@ import {
   IonTabButton,
   IonRouterOutlet,
   setupIonicReact,
+  IonTitle,
 } from '@ionic/react';
-import { home, camera, settings, person, logOut, chatbox, apps, add } from 'ionicons/icons';
+import { homeOutline, cameraOutline, gridOutline, addOutline, chatbubbleEllipsesOutline, personOutline, informationCircleOutline, logOutOutline, settingsOutline, add, apps, chatbox, home, person } from 'ionicons/icons';
 import { Redirect, Route, BrowserRouter as Router } from 'react-router-dom';
 import Home from './pages/Home';
 import Photo from './pages/Photo';
 import Collections from './pages/Collections';
 import Items from './pages/Items';
 import Settings from './pages/Settings';
+import About from './pages/About';
 import Profile from './pages/Profile';
+import Contact from './pages/Contact';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import ForgotPassword from './components/ForgotPassword';
@@ -68,38 +71,47 @@ const App: React.FC = () => {
   return (
     <IonApp>
       <Router>
-        <IonMenu side="start" contentId="main-content" type="overlay">
-        <IonHeader>
-            <IonToolbar>
-              <h1>Menu</h1>
-            </IonToolbar>
-          </IonHeader>
-          <IonContent>
-            <IonList>
-              <IonItem button routerLink="/photo">
-                <IonIcon icon={add} />
-                <IonLabel>Add Item</IonLabel>
-              </IonItem>
-              <IonItem button routerLink="/collections">
-                <IonIcon icon={apps} />
-                <IonLabel>Collections</IonLabel>
-              </IonItem>
-              <IonItem button routerLink="/settings">
-                <IonIcon icon={settings} />
-                <IonLabel>Settings</IonLabel>
-              </IonItem>
-              <IonItem button routerLink="/profile">
-                <IonIcon icon={person} />
-                <IonLabel>Profile</IonLabel>
-              </IonItem>
-              {isAuthenticated && (
-                <IonItem button onClick={handleLogout}>
-                  <IonIcon icon={logOut} />
-                  <IonLabel>Logout</IonLabel>
+        <div className="app-container">
+          <IonMenu side="start" contentId="main-content" type="overlay" className="menu-container">
+            <IonHeader>
+              <IonToolbar>
+                <IonTitle>Menu</IonTitle>
+              </IonToolbar>
+            </IonHeader>
+            <IonContent className="menu-list">
+              <IonList>
+                <IonItem button routerLink="/home">
+                  <IonIcon icon={homeOutline} />
+                  <IonLabel>Home</IonLabel>
                 </IonItem>
-              )}
-            </IonList>
-          </IonContent>
+                <IonItem button routerLink="/photo">
+                  <IonIcon icon={add} />
+                  <IonLabel>Create Item</IonLabel>
+                </IonItem>
+                <IonItem button routerLink="/gallery">
+                  <IonIcon icon={gridOutline} />
+                  <IonLabel>Collections</IonLabel>
+                </IonItem>
+                <IonItem button routerLink="/profile">
+                  <IonIcon icon={personOutline} />
+                  <IonLabel>Profile</IonLabel>
+                </IonItem>
+                <IonItem button routerLink="/settings">
+                  <IonIcon icon={settingsOutline} />
+                  <IonLabel>Settings</IonLabel>
+                </IonItem>
+                <IonItem button routerLink="/about">
+                  <IonIcon icon={informationCircleOutline} />
+                  <IonLabel>About</IonLabel>
+                </IonItem>
+                {isAuthenticated && (
+                  <IonItem button onClick={handleLogout}>
+                    <IonIcon icon={logOutOutline} />
+                    <IonLabel>Logout</IonLabel>
+                  </IonItem>
+                )}
+              </IonList>
+            </IonContent>
           </IonMenu>
 
         <IonRouterOutlet id="main-content">
