@@ -989,4 +989,56 @@ ion-content {
   margin-bottom: 10px; 
 }
 
+/* Profile page */
+.profile-page .ion-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-image {
+  font-size: 48px;
+  color: #000000;
+  display: block;
+  margin-top: 100%;
+  margin-left: 52%;
+  zoom: 1.3;
+}
+
+.second-image {
+  font-size: 24px;
+  color: blue;
+  position: absolute;
+  margin-left: 70%;
+}
+
+.custom-card {
+  width: 90%;
+  max-width: 100%;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+  position: relative;
+}
+
+.profile-page .profile-header {
+  --background: #FAC49E;
+  --ion-color-base: #FAC49E;
+  --ion-toolbar-background: #FAC49E;
+  --ion-toolbar-color: #000000;
+  --ion-title-font-size: 1.5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.bio-button {
+  background-color: #FCDDC7;
+  color: #000000;
+}
 

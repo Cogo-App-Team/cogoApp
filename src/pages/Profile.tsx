@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import {
   IonContent,
@@ -17,13 +16,12 @@ import {
   IonCard,
   IonCardContent,
   IonInput,
+  IonIcon,
 } from '@ionic/react';
-import './Profile.css'; 
-import { Link } from 'react-router-dom'; 
-
+import './Profile.css';
+import { personCircleOutline, createOutline } from 'ionicons/icons';
 
 const ProfilePage: React.FC = () => {
-  
   const [bio, setBio] = useState<string>('');
   const [isLocked, setIsLocked] = useState<boolean>(true);
 
@@ -32,19 +30,20 @@ const ProfilePage: React.FC = () => {
   };
 
   return (
-    <IonPage className="profile-page-container">
-      <IonHeader>
+    <IonPage className="profile-page">
+      <IonHeader className="profile-header">
         <IonToolbar>
-          <IonMenuButton slot="start" />
           <IonButtons slot="start">
-            <IonButton>
-            </IonButton>
+            <IonMenuButton />
           </IonButtons>
-          <IonTitle></IonTitle>
-          <IonButtons slot="end">
-            <IonButton>
-            </IonButton>
-          </IonButtons>
+          <IonTitle className="top-header-title">Profile</IonTitle>
+          {!isLocked && (
+            <IonButtons slot="end">
+              <IonButton color="secondary">
+                <IonIcon name="create-outline" />
+              </IonButton>
+            </IonButtons>
+          )}
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding ion-text-center profile-page">
@@ -53,20 +52,11 @@ const ProfilePage: React.FC = () => {
             <IonRow>
               <IonCol size="6" className="ion-text-center">
                 <IonAvatar>
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/128/456/456283.png"
-                    alt="Profile"
-                    className="profile-image"
-                  />
+                <IonIcon icon={personCircleOutline} className="profile-image" />
                 </IonAvatar>
               </IonCol>
               <IonCol size="6" className="ion-text-end">
-               
-                <img
-                  src="https://cdn-icons-png.flaticon.com/128/84/84380.png"
-                  alt="Second Image"
-                  className="second-image"
-                />
+              <IonIcon icon={createOutline} className="second-image" />
               </IonCol>
             </IonRow>
             <IonRow>
@@ -82,53 +72,35 @@ const ProfilePage: React.FC = () => {
 
             <IonRow>
               <IonCol size="12">
-                <IonCard>
-                  <IonCardContent>
-                    <IonGrid>
-                      <IonRow>
-                        <IonCol className="profile-stat-container">
-                          <IonLabel className="profile-stat">0</IonLabel>
-                          <IonLabel className="profile-label">Collection</IonLabel>
-                        </IonCol>
-                        <IonCol className="profile-stat-container">
-                          <IonLabel className="profile-stat">0</IonLabel>
-                          <IonLabel className="profile-label">Followers</IonLabel>
-                        </IonCol>
-                        <IonCol className="profile-stat-container">
-                          <IonLabel className="profile-stat">0</IonLabel>
-                          <IonLabel className="profile-label">Following</IonLabel>
-                        </IonCol>
-                      </IonRow>
-                    </IonGrid>
-                  </IonCardContent>
-                </IonCard>
+              <IonButton
+  expand="full"
+  color="custom-edit-bio"
+  className="bio-button"
+  onClick={toggleLock}
+>
+  {isLocked ? 'Edit Bio' : 'Save Bio'}
+</IonButton>
+
+
               </IonCol>
             </IonRow>
 
             <IonRow>
               <IonCol size="12">
-                <IonCard onClick={() => setBio('')}>
+                <IonCard>
                   <IonCardContent>
-                    <IonInput
-                      className="profile-input"
-                      placeholder="Write your biography"
-                      value={bio}
-                      onIonChange={(e) => setBio(e.detail.value!)}
-                    />
+                    {isLocked ? (
+                      <IonLabel className="profile-label">{bio}</IonLabel>
+                    ) : (
+                      <IonInput
+                        className="profile-input"
+                        placeholder="Write your biography"
+                        value={bio}
+                        onIonChange={(e) => setBio(e.detail.value!)}
+                      />
+                    )}
                   </IonCardContent>
                 </IonCard>
-              </IonCol>
-            </IonRow>
-
-            <IonRow>
-              <IonCol size="12" className="ion-text-center">
-                
-              </IonCol>
-            </IonRow>
-
-            <IonRow>
-              <IonCol size="12" className="ion-text-center">
-               
               </IonCol>
             </IonRow>
           </IonGrid>
