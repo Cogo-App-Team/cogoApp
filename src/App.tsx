@@ -21,7 +21,7 @@ import { homeOutline, cameraOutline, gridOutline, addOutline, chatbubbleEllipses
 import { Redirect, Route, BrowserRouter as Router, useHistory } from 'react-router-dom';
 import Home from './pages/Home';
 import Photo from './pages/Photo';
-import Gallery from './pages/Gallery';
+import Collections from './pages/Collections';
 import Settings from './pages/Settings';
 import About from './pages/About';
 import Profile from './pages/Profile';
@@ -43,6 +43,7 @@ import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import { Camera } from '@capacitor/camera';
+import Items from './pages/Items';
 
 setupIonicReact();
 
@@ -92,7 +93,7 @@ const App: React.FC = () => {
                   <IonIcon icon={add} />
                   <IonLabel>Create Item</IonLabel>
                 </IonItem>
-                <IonItem button routerLink="/gallery">
+                <IonItem button routerLink="/collections">
                   <IonIcon icon={gridOutline} />
                   <IonLabel>Collections</IonLabel>
                 </IonItem>
@@ -120,12 +121,13 @@ const App: React.FC = () => {
 
           <IonRouterOutlet id="main-content" className="main-content">
             <Route path="/home" component={Home} exact />
-            <Route path="/gallery" component={Gallery} exact />
+            <Route path="/collections" component={Collections} exact />
             <Route path="/photo" component={Photo} exact />
             <Route path="/contact" component={Contact} exact />
             <Route path="/profile" component={Profile} exact />
             <Route path="/settings" component={Settings} exact />
             <Route path="/about" component={About} exact />
+            <Route path="/items" component={Items} exact />
             <Route path="/login" component={Login} exact />
             <Route path="/login/forgot-password" component={ForgotPassword} exact />
             <Route path="/login/signup" component={Signup} exact />
@@ -137,7 +139,7 @@ const App: React.FC = () => {
               <IonTabs className="custom-tabs">
                 <IonRouterOutlet>
                   <Route path="/home" component={Home} exact />
-                  <Route path="/gallery" component={Gallery} exact />
+                  <Route path="/collections" component={Collections} exact />
                   <Route path="/photo" component={Photo} exact />
                   <Route path="/contact" component={Contact} exact />
                   <Route path="/profile" component={Profile} exact />
@@ -149,7 +151,7 @@ const App: React.FC = () => {
                   <IonTabButton tab="home" href="/home">
                     <IonIcon icon={homeOutline} />
                   </IonTabButton>
-                  <IonTabButton tab="gallery" href="/gallery">
+                  <IonTabButton tab="collections" href="/collections">
                     <IonIcon icon={gridOutline} />
                   </IonTabButton>
                   <IonTabButton tab="photo" href="/photo">
