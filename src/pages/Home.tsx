@@ -39,7 +39,7 @@ const Home: React.FC = () => {
           </div>
 
           <div className="big-card">
-          <IonRouterLink href="/gallery">
+          <IonRouterLink href="/collections">
   <IonCard className="custom-card">
     <div className="card-image-container">
       <img src="https://blog.crownandcaliber.com/wp-content/uploads/2015/03/Rolex-Submariner-L-40826-R-47525-5305-1024x683.jpg" alt="Big Card Image" />
@@ -54,7 +54,7 @@ const Home: React.FC = () => {
             <IonGrid>
               <IonRow>
                 <IonCol size="4">
-                <IonRouterLink href="/gallery">
+                <IonRouterLink href="/collections">
                   <IonCard className="custom-card">
                   <IonIcon icon={starOutline} className="ion-icon-custom" />
                     My Collection
@@ -62,7 +62,7 @@ const Home: React.FC = () => {
                   </IonRouterLink>
                 </IonCol>
                 <IonCol size="4">
-                <IonRouterLink href="/gallery">
+                <IonRouterLink href="/collections">
                   <IonCard className="custom-card">
                   <IonIcon icon={trendingUpOutline} className="ion-icon-custom" />
                     Trending
@@ -70,7 +70,7 @@ const Home: React.FC = () => {
                   </IonRouterLink>
                 </IonCol>
                 <IonCol size="4">
-                <IonRouterLink href="/gallery">
+                <IonRouterLink href="/collections">
                   <IonCard className="custom-card">
                   <IonIcon icon={heartOutline} className="ion-icon-custom" />
                     Favorites
@@ -85,7 +85,7 @@ const Home: React.FC = () => {
   <IonGrid>
     <IonRow>
       <IonCol size="6">
-      <IonRouterLink href="/gallery">
+      <IonRouterLink href="/collections">
         <IonCard className="custom-card">
           <div className="card-image-container">
             <img src="https://www.cleveland.com/resizer/Hhp5cJpzHpIN-ibf7wvh0rlCd44=/800x0/smart/cloudfront-us-east-1.images.arcpublishing.com/advancelocal/AOGHSAX6PJE4LCOTQBALIDEPUM.JPG" alt="Card 4" />
@@ -97,7 +97,7 @@ const Home: React.FC = () => {
         </IonRouterLink>
       </IonCol>
       <IonCol size="6">
-      <IonRouterLink href="/gallery">
+      <IonRouterLink href="/collections">
         <IonCard className="custom-card">
           <div className="card-image-container">
             <img src="https://assetsio.reedpopcdn.com/rare-pokemon-cards-pikachu-charizard-blastoise-chansey.jpg?width=848&quality=80&format=jpg&auto=webp" alt="Card 5" />
