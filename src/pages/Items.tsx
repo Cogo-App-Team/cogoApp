@@ -73,8 +73,8 @@ const Items: React.FC = () => {
   };
 
   return (
-    <IonPage>
-      <IonHeader>
+    <IonPage className="items-page">
+      <IonHeader className="items-header">
         <IonToolbar>
           <IonMenuButton slot="start" />
           <IonTitle>Items</IonTitle>

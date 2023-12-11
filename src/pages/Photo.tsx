@@ -46,19 +46,27 @@ const Photo: React.FC = () => {
     <IonPage className="photo-page">
       <IonHeader className="photo-header">
         <IonToolbar>
-        <IonMenuButton slot="start" />
+          <IonMenuButton slot="start" />
           <IonTitle>Create Item</IonTitle>
         </IonToolbar>
       </IonHeader>
+
       <IonContent className="ion-padding">
+        <div className="centered-text">
+          <p>Take a photo to add to your collection!</p>
+        </div>
         {photoData ? (
           <img src={photoData} alt="Taken" />
         ) : (
           <div className="ion-text-center">
-            <IonButton expand="full" onClick={takePhoto}>
-              <IonIcon icon={camera} />
-              <br />
-              Add to your collection
+            <IonButton
+              className="photo-custom-button"
+              expand="full"
+              onClick={takePhoto}
+              color="YourColor" // Replace "YourColor" with your desired button color
+            >
+              <IonIcon icon={camera} className="icon-padding" />
+              Take a photo
             </IonButton>
           </div>
         )}

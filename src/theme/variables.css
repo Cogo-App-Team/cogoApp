@@ -315,7 +315,6 @@ svg {
   color: var(--ion-color-favorite-contrast);
 }
 
-
 .custom-app {
   --background: #FAC49E;
   height: 100vh;
@@ -632,7 +631,7 @@ ion-title {
   --button-color: #15104D;
   --button-border-radius: 90px;
 
-  width: 90%;
+  width: 95%;
   max-width: 100%;
   height: 100%;
   display: flex;
@@ -655,7 +654,7 @@ ion-title {
 }
 
 .home-page-content.custom-card {
-  margin-top: 10%;
+  margin-top: 5%;
   font-size: 1.5em;
   color: #15104D;
 }
@@ -673,7 +672,7 @@ ion-tab-bar,
 
 /* Search Bar */
 .search-bar {
-  margin-top: 20px;
+  margin-top: 2%;
 }
 
 .search-bar ion-searchbar {
@@ -739,7 +738,7 @@ ion-tab-bar,
   background-color: #f0f1f1;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  margin-bottom: 15%;
+  margin-bottom: 5%;
   color: #000000;
   text-align: center;
 }
@@ -1045,8 +1044,50 @@ ion-content {
   --ion-toolbar-color: #ffffff; /* For text color in the toolbar */
 }
 
+/* Rearrange elements on the page */
+.photo-page .ion-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items vertically */
+}
+
+/* Style the image */
+.photo-page img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Centered text */
+.centered-text {
+  text-align: center;
+  margin-top: 50px;
+  color: #111827;
+  font-weight: bold; /* Adjust the margin-top to move the text lower */
+}
+
+/* Icon padding */
+.icon-padding {
+  margin-right: 10px; /* Adjust the margin-right for icon padding */
+}
+
+/* Custom button styling */
+.photo-custom-button {
+  background-color: #FCDDC7; /* Replace with your desired button color */
+  color: #000000; /* Text color */
+  margin-top: 20px; /* Adjust the margin-top to move the button lower */
+}
+
+
 /* Collections page */
 .collections-page .collections-header {
+  --background: #FAC49E; /* Replace with your desired color */
+  --ion-color-base: #FAC49E; /* For background color */
+  --ion-toolbar-background: #FAC49E; /* For toolbar background color */
+  --ion-toolbar-color: #ffffff; /* For text color in the toolbar */
+}
+
+/* Items page */
+.items-page .items-header {
   --background: #FAC49E; /* Replace with your desired color */
   --ion-color-base: #FAC49E; /* For background color */
   --ion-toolbar-background: #FAC49E; /* For toolbar background color */
