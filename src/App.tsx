@@ -18,7 +18,7 @@ import {
   setupIonicReact,
 } from '@ionic/react';
 import { homeOutline, cameraOutline, gridOutline, addOutline, chatbubbleEllipsesOutline, personOutline, informationCircleOutline, logOutOutline, settingsOutline, add } from 'ionicons/icons';
-import { Redirect, Route, BrowserRouter as Router, useHistory } from 'react-router-dom';
+import { Redirect, Route, BrowserRouter as Router, useHistory, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import Photo from './pages/Photo';
 import Collections from './pages/Collections';
@@ -54,120 +54,134 @@ const App: React.FC = () => {
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setIsAuthenticated(true);
-      } else {
-        setIsAuthenticated(false);
-      }
+      setIsAuthenticated(!!user);
     });
   }, []);
 
-  const handleLogout = async () => {
-    const auth = getAuth();
-    try {
-      await signOut(auth);
-      setIsAuthenticated(false);
-      history.push('/login');
-    } catch (error) {
-      console.error('Logout failed:', error);
+  const handleLogout = async (): Promise<void> => {
+    if (isAuthenticated) {
+      const auth = getAuth();
+      try {
+        await signOut(auth);
+        setIsAuthenticated(false);
+        history.push('/login');
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error('Logout failed:', error.message);
+        } else {
+          console.error('Unexpected error:', error);
+        }
+      }
     }
   };
 
   return (
     <IonApp>
       <Router>
-        <div className="app-container">
-          <IonMenu side="start" contentId="main-content" type="overlay" className="menu-container">
-            <IonHeader>
-              <IonToolbar>
-                <IonTitle>Menu</IonTitle>
-              </IonToolbar>
-            </IonHeader>
-            <IonContent className="menu-list">
-              <IonList>
-                <IonItem button routerLink="/home">
-                  <IonIcon icon={homeOutline} />
-                  <IonLabel>Home</IonLabel>
-                </IonItem>
-                <IonItem button routerLink="/photo">
-                  <IonIcon icon={add} />
-                  <IonLabel>Create Item</IonLabel>
-                </IonItem>
-                <IonItem button routerLink="/collections">
-                  <IonIcon icon={gridOutline} />
-                  <IonLabel>Collections</IonLabel>
-                </IonItem>
-                <IonItem button routerLink="/profile">
-                  <IonIcon icon={personOutline} />
-                  <IonLabel>Profile</IonLabel>
-                </IonItem>
-                <IonItem button routerLink="/settings">
-                  <IonIcon icon={settingsOutline} />
-                  <IonLabel>Settings</IonLabel>
-                </IonItem>
-                <IonItem button routerLink="/about">
-                  <IonIcon icon={informationCircleOutline} />
-                  <IonLabel>About</IonLabel>
-                </IonItem>
-                {isAuthenticated && (
-                  <IonItem button onClick={handleLogout}>
-                    <IonIcon icon={logOutOutline} />
-                    <IonLabel>Logout</IonLabel>
-                  </IonItem>
-                )}
-              </IonList>
-            </IonContent>
-          </IonMenu>
-
-          <IonRouterOutlet id="main-content" className="main-content">
-            <Route path="/home" component={Home} exact />
-            <Route path="/collections" component={Collections} exact />
-            <Route path="/photo" component={Photo} exact />
-            <Route path="/contact" component={Contact} exact />
-            <Route path="/profile" component={Profile} exact />
-            <Route path="/settings" component={Settings} exact />
-            <Route path="/about" component={About} exact />
-            <Route path="/items" component={Items} exact />
-            <Route path="/login" component={Login} exact />
-            <Route path="/login/forgot-password" component={ForgotPassword} exact />
-            <Route path="/login/signup" component={Signup} exact />
-            <Route path="/" render={() => <Redirect to="/home" />} exact />
-          </IonRouterOutlet>
-
-          {isAuthenticated && (
-            <div className="tabs-container">
-              <IonTabs className="custom-tabs">
-                <IonRouterOutlet>
-                  <Route path="/home" component={Home} exact />
-                  <Route path="/collections" component={Collections} exact />
-                  <Route path="/photo" component={Photo} exact />
-                  <Route path="/contact" component={Contact} exact />
-                  <Route path="/profile" component={Profile} exact />
-                  <Route path="/settings" component={Settings} exact />
-                  <Route path="/about" component={About} exact />
-                  <Route path="/" render={() => <Redirect to="/home" />} exact />
-                </IonRouterOutlet>
-                <IonTabBar slot="bottom" className="custom-tab-bar">
-                  <IonTabButton tab="home" href="/home">
+        {isAuthenticated === null ? (
+          <div>Loading...</div>
+        ) : isAuthenticated ? (
+          <div className="app-container">
+            <IonMenu side="start" contentId="main-content" type="overlay" className="menu-container">
+              <IonHeader>
+                <IonToolbar>
+                  <IonTitle>Menu</IonTitle>
+                </IonToolbar>
+              </IonHeader>
+              <IonContent className="menu-list">
+                <IonList>
+                  <IonItem button routerLink="/home">
                     <IonIcon icon={homeOutline} />
-                  </IonTabButton>
-                  <IonTabButton tab="collections" href="/collections">
+                    <IonLabel>Home</IonLabel>
+                  </IonItem>
+                  <IonItem button routerLink="/photo">
+                    <IonIcon icon={add} />
+                    <IonLabel>Create Item</IonLabel>
+                  </IonItem>
+                  <IonItem button routerLink="/collections">
                     <IonIcon icon={gridOutline} />
-                  </IonTabButton>
-                  <IonTabButton tab="photo" href="/photo">
-                    <IonIcon icon={addOutline} />
-                  </IonTabButton>
-                  <IonTabButton tab="contact" href="/contact">
-                    <IonIcon icon={chatbubbleEllipsesOutline} />
-                  </IonTabButton>
-                  <IonTabButton tab="profile" href="/profile">
+                    <IonLabel>Collections</IonLabel>
+                  </IonItem>
+                  <IonItem button routerLink="/profile">
                     <IonIcon icon={personOutline} />
-                  </IonTabButton>
-                </IonTabBar>
-              </IonTabs>
-            </div>
-          )}
-        </div>
+                    <IonLabel>Profile</IonLabel>
+                  </IonItem>
+                  <IonItem button routerLink="/settings">
+                    <IonIcon icon={settingsOutline} />
+                    <IonLabel>Settings</IonLabel>
+                  </IonItem>
+                  <IonItem button routerLink="/about">
+                    <IonIcon icon={informationCircleOutline} />
+                    <IonLabel>About</IonLabel>
+                  </IonItem>
+                  {isAuthenticated && (
+                    <IonItem button onClick={handleLogout}>
+                      <IonIcon icon={logOutOutline} />
+                      <IonLabel>Logout</IonLabel>
+                    </IonItem>
+                  )}
+                </IonList>
+              </IonContent>
+            </IonMenu>
+
+            <IonRouterOutlet id="main-content" className="main-content">
+              <Route path="/home" component={Home} exact />
+              <Route path="/collections" component={Collections} exact />
+              <Route path="/photo" component={Photo} exact />
+              <Route path="/contact" component={Contact} exact />
+              <Route path="/profile" component={Profile} exact />
+              <Route path="/settings" component={Settings} exact />
+              <Route path="/about" component={About} exact />
+              <Route path="/items" component={Items} exact />
+              <Switch>
+                <Route path="/login/signup" component={Signup} exact />
+                <Route path="/login/forgot-password" component={ForgotPassword} exact />
+                <Route path="/login" render={() => <Redirect to="/home" />} exact />
+              </Switch>
+            </IonRouterOutlet>
+
+            {isAuthenticated && (
+              <div className="tabs-container">
+                <IonTabs className="custom-tabs">
+                  <IonRouterOutlet>
+                    <Route path="/home" component={Home} exact />
+                    <Route path="/collections" component={Collections} exact />
+                    <Route path="/photo" component={Photo} exact />
+                    <Route path="/contact" component={Contact} exact />
+                    <Route path="/profile" component={Profile} exact />
+                    <Route path="/settings" component={Settings} exact />
+                    <Route path="/about" component={About} exact />
+                    <Route path="/" render={() => <Redirect to="/home" />} exact />
+                  </IonRouterOutlet>
+                  <IonTabBar slot="bottom" className="custom-tab-bar">
+                    <IonTabButton tab="home" href="/home">
+                      <IonIcon icon={homeOutline} />
+                    </IonTabButton>
+                    <IonTabButton tab="collections" href="/collections">
+                      <IonIcon icon={gridOutline} />
+                    </IonTabButton>
+                    <IonTabButton tab="photo" href="/photo">
+                      <IonIcon icon={addOutline} />
+                    </IonTabButton>
+                    <IonTabButton tab="contact" href="/contact">
+                      <IonIcon icon={chatbubbleEllipsesOutline} />
+                    </IonTabButton>
+                    <IonTabButton tab="profile" href="/profile">
+                      <IonIcon icon={personOutline} />
+                    </IonTabButton>
+                  </IonTabBar>
+                </IonTabs>
+              </div>
+            )}
+          </div>
+        ) : (
+          <Switch>
+            <Route path="/login/signup" component={Signup} exact />
+            <Route path="/login/forgot-password" component={ForgotPassword} exact />
+            <Route path="/login" component={Login} exact />
+            <Redirect to="/login" />
+          </Switch>
+        )}
       </Router>
     </IonApp>
   );

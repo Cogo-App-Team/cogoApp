@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import App from './App';
 import { defineCustomElements } from '@ionic/pwa-elements/loader';
 
-import '@ionic/react/css/ionic.bundle.css'; // Add this import statement
+import '@ionic/react/css/ionic.bundle.css';
 
 defineCustomElements(window);
 const container = document.getElementById('root');
